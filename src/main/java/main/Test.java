@@ -2,7 +2,16 @@ package main;
 
 public class Test {
     public static void main(String[] args) {
-        PlateformeCandidatures plateformeCandidatures= new PlateformeCandidatures(130, 7, 10, 20);
+        /*PlateformeCandidatures plateformeCandidatures= new PlateformeCandidatures(3, 1, 1, 3);
         System.out.println(plateformeCandidatures.toString());
+
+        plateformeCandidatures.mariagemixte();
+        plateformeCandidatures.affichage();*/
+
+        PlateformeCandidatures testCours = new PlateformeCandidatures();
+        System.out.println(testCours);
+
+        testCours.mariagemixte();
+        testCours.affichage();
     }
 }

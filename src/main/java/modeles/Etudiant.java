@@ -20,6 +20,13 @@ public class Etudiant {
         this.listeVoeux = new ArrayList<Etablissement>();
     }
 
+    public Etudiant(long id, List<Etablissement> listeVoeux, boolean estAffecte, Etablissement etablissementAffecte) {
+        this.id = id;
+        this.listeVoeux = listeVoeux;
+        this.estAffecte = estAffecte;
+        this.etablissementAffecte = etablissementAffecte;
+    }
+
     /**
      * Génère tous les etablissements dans la liste de voeux ordonnés de manière aléatoire
      * @param etablissements liste de tous les établissements, passé en paramètre
@@ -39,7 +46,7 @@ public class Etudiant {
         return listeVoeux;
     }
 
-    public boolean isEstAffecte() {
+    public boolean estAffecte() {
         return estAffecte;
     }
 
@@ -70,5 +77,24 @@ public class Etudiant {
             res.append("]\n");
         }
         return res.toString();
+    }
+
+    /* ********************* */
+    public Etablissement getPremierVoeux()
+    {
+        return listeVoeux.get(0);
+    }
+
+    public void setAffectation(Etablissement etablissement)
+    {
+        this.etablissementAffecte = etablissement;
+        this.estAffecte = true;
+    }
+
+    public void desaffecter()
+    {
+        this.etablissementAffecte = null;
+        this.estAffecte = false;
+        this.listeVoeux.remove(0);
     }
 }
