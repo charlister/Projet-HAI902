@@ -252,7 +252,7 @@ public class PlateformeCandidatures {
     {
         for (Etudiant etudiant : candidats)
         {
-            System.out.println("Etudiant"+etudiant.getId() + ", affectation : Etablissement[capacite : " + etudiant.getEtablissementAffecte().getCapaciteAccueil()+ "]" + etudiant.getEtablissementAffecte().getId());
+            System.out.println("Etudiant"+etudiant.getId() + ", affectation : Etablissement[capacite : " + etudiant.getEtablissementAffecte().getCapaciteAccueil()+ "]" + etudiant.getEtablissementAffecte().getId() + "\n");
         }
     }
 
