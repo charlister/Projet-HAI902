@@ -309,6 +309,11 @@ public class PlateformeCandidatures {
         return satisfactionGlobale/this.etablissements.size();
     }
 
+    public Sauvegarde sauvegarder(String methode)
+    {
+        return  new Sauvegarde(methode, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissements());
+    }
+
     /* =========================================================================================
      *  Pour mettre en place un jeu de données correspondant à l'exemple du cours
      *  =========================================================================================
