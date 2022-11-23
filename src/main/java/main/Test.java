@@ -11,7 +11,7 @@ public class Test {
         PlateformeCandidatures testCours = new PlateformeCandidatures();
         System.out.println(testCours);
 
-        testCours.mariagemixte();
-        testCours.affichage();
+        testCours.mariageStableEtablissements();
+        testCours.affichageAffectations();
     }
 }

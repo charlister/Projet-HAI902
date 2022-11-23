@@ -85,38 +85,68 @@ public class Etablissement {
         return res.toString();
     }
 
-    /* ************************************* */
+    /* =========================================================================================
+    *  Méthodes implémentées dans la cadre de la mise en place de l'algorithme du mariage stable
+    *  =========================================================================================
+    */
 
-    public boolean peutAccueillir()
+    /**
+     * Permet de confirmer, ou non, la capacité à accueillir d'un établissement
+     * @return la comparaison entre la taille de la liste de candidats acceptés et sa capacité d'accueil.
+     */
+    public boolean accueilPossible()
     {
+        /* TRACAGE
         int places = this.capaciteAccueil - candidatsAcceptes.size();
-        System.out.println("Nombre de places : " + places);
+        System.out.println("Nombre de places : " + places);*/
         return candidatsAcceptes.size() < this.capaciteAccueil;
     }
 
+    /**
+     * Permet d'ajouter un étudiant à la liste de candidats acceptés par l'établissement
+     * @param etudiant, étudiant à ajouter dans la liste des candidats acceptés
+     */
     public void ajoutCandidat(Etudiant etudiant)
     {
         this.candidatsAcceptes.add(etudiant);
     }
 
-    public Etudiant moinsBon()
+    /**
+     * Permet de parcourir le liste des candidats acceptés par l'établissement, et de retourner l'étudiant dont la
+     * position dans le classement de l'établissement est le moins bon
+     * @return
+     */
+    public Etudiant dernierCandidat()
     {
-        int position = -1;
-        Etudiant moinsBon = null;
+        int classementCandidat = -1;
+        Etudiant dernier = null;
         for (Etudiant etudiant : candidatsAcceptes)
         {
-            int positionTMP = this.classement.indexOf(etudiant);
-            if(position == -1)
+            int classementEtudiant = this.classement.indexOf(etudiant);
+            if(classementCandidat == -1)
             {
-                position = positionTMP;
-                moinsBon = etudiant;
-            } else if (position > positionTMP) {
-                position = positionTMP;
-                moinsBon = etudiant;
+                classementCandidat = classementEtudiant;
+                dernier = etudiant;
+            } else if (classementCandidat > classementEtudiant) {
+                classementCandidat = classementEtudiant;
+                dernier = etudiant;
             }
         }
-        return moinsBon;
+        return dernier;
     }
+
+    /**
+     * Permet de restaurer notre jeu de données pour être capable de lui appliquer une nouvelle affectation
+     */
+    public void restaurer()
+    {
+        this.candidatsAcceptes.clear();
+    }
+
+    /* =========================================================================================
+     *  Méthodes implémentées dans la cadre du calcul de la satisfaction
+     *  =========================================================================================
+     */
 
 
 }
