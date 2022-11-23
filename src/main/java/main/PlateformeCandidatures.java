@@ -2,6 +2,7 @@ package main;
 
 import modeles.Etablissement;
 import modeles.Etudiant;
+import modeles.Sauvegarde;
 
 import java.util.ArrayList;
 import java.util.HashMap;
