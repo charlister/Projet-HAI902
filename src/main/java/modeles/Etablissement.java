@@ -148,5 +148,14 @@ public class Etablissement {
      *  =========================================================================================
      */
 
-
+    /**
+     * mesure le degré de satisfaction pour un établissement.
+     * Formule : ( (nombre de candidats + 1) - (position candidat accepté dans le classement de l'établissement) ) / nombre de candidats.
+     * /!\ cette formule est valide dans le cas où chaque établissement n'accepte qu'un candidat.
+     * @return le degré de satisfaction d'un établissement
+     */
+    public float degreSatisfaction() {
+        float nbCandidats = this.classement.size();
+        return ((float) (nbCandidats - this.classement.indexOf(this.candidatsAcceptes.get(0)))) / nbCandidats;
+    }
 }
