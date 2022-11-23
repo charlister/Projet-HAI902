@@ -5,7 +5,7 @@ public class Test {
         /*PlateformeCandidatures plateformeCandidatures= new PlateformeCandidatures(3, 1, 1, 3);
         System.out.println(plateformeCandidatures.toString());
 
-        plateformeCandidatures.mariagemixte();
+        plateformeCandidatures.mariageStableEtablissements();
         plateformeCandidatures.affichage();*/
 
         PlateformeCandidatures testCours = new PlateformeCandidatures();
