@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/modeles/Sauvegarde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Test.java" afterDir="false" />
-    </list>
+    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="Sauvegarde résultats après application algorithme mariage stable" />
     <list id="44aee43e-db1c-40d6-8ce6-bef9446efca2" name="Changes by Scooby" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" afterDir="false" />
     </list>
@@ -27,15 +22,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java">
-      <ranges>
-        <range start1="4" end1="4" start2="4" end2="5" changelist="44aee43e-db1c-40d6-8ce6-bef9446efca2" />
-        <range start1="253" end1="254" start2="254" end2="255" changelist="44aee43e-db1c-40d6-8ce6-bef9446efca2" />
-        <range start1="310" end1="310" start2="311" end2="316" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -95,8 +81,16 @@
       <workItem from="1669065451193" duration="6436000" />
       <workItem from="1669146751727" duration="7510000" />
       <workItem from="1669230071156" duration="1530000" />
-      <workItem from="1669231861932" duration="3690000" />
+      <workItem from="1669231861932" duration="4226000" />
     </task>
+    <task id="LOCAL-00001" summary="Sauvegarde résultats après application algorithme mariage stable">
+      <created>1669238401628</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669238401628</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,5 +106,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Sauvegarde résultats après application algorithme mariage stable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sauvegarde résultats après application algorithme mariage stable" />
   </component>
 </project>
