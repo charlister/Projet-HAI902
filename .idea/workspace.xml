@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="Sauvegarde résultats après application algorithme mariage stable" />
-    <list id="44aee43e-db1c-40d6-8ce6-bef9446efca2" name="Changes by Scooby" comment="">
+    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="Sauvegarde résultats après application algorithme mariage stable">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modeles/Sauvegarde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/Sauvegarde.java" afterDir="false" />
     </list>
+    <list id="44aee43e-db1c-40d6-8ce6-bef9446efca2" name="Changes by Scooby" comment="Changes by Scooby" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +84,8 @@
       <workItem from="1669065451193" duration="6436000" />
       <workItem from="1669146751727" duration="7510000" />
       <workItem from="1669230071156" duration="1530000" />
-      <workItem from="1669231861932" duration="4226000" />
+      <workItem from="1669231861932" duration="7729000" />
+      <workItem from="1669306228176" duration="4511000" />
     </task>
     <task id="LOCAL-00001" summary="Sauvegarde résultats après application algorithme mariage stable">
       <created>1669238401628</created>
@@ -90,7 +94,35 @@
       <option name="project" value="LOCAL" />
       <updated>1669238401628</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changes by Scooby">
+      <created>1669239139434</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1669239139434</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changes by Scooby">
+      <created>1669239163067</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669239163068</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Sauvegarde résultats après application algorithme mariage stable">
+      <created>1669239184172</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1669239184172</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Sauvegarde résultats après application algorithme mariage stable">
+      <created>1669239224916</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1669239224916</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +140,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changes by Scooby" />
     <MESSAGE value="Sauvegarde résultats après application algorithme mariage stable" />
     <option name="LAST_COMMIT_MESSAGE" value="Sauvegarde résultats après application algorithme mariage stable" />
   </component>

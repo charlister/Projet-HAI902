@@ -310,9 +310,9 @@ public class PlateformeCandidatures {
         return satisfactionGlobale/this.etablissements.size();
     }
 
-    public Sauvegarde sauvegarder(String methode)
+    public Sauvegarde sauvegarder(Sauvegarde.Priorite priorite)
     {
-        return  new Sauvegarde(methode, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissements());
+        return  new Sauvegarde(priorite, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissements());
     }
 
     /* =========================================================================================
