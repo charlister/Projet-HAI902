@@ -8,6 +8,7 @@ public class Etablissement {
     /* ATTRIBUTES */
     private static long compteurEtablissements = 0;
     private long id;
+    private String nom;
     private int capaciteAccueil;
     private List<Etudiant> classement, candidatsAcceptes;
 
@@ -17,10 +18,6 @@ public class Etablissement {
         this.capaciteAccueil = capaciteAccueil;
         this.classement = new ArrayList<Etudiant>();
         this.candidatsAcceptes = new ArrayList<Etudiant>();
-    }
-
-    public void setClassement(List<Etudiant> classement) {
-        this.classement = classement;
     }
 
     public Etablissement(long id, int capaciteAccueil, List<Etudiant> classement, List<Etudiant> candidatsAcceptes) {
@@ -41,12 +38,12 @@ public class Etablissement {
     }
 
     /* ACCESSEURS */
-    public static long getCompteurEtablissements() {
-        return compteurEtablissements;
-    }
-
     public long getId() {
         return id;
+    }
+
+    public String getNom() {
+        return "Etablissement"+this.id;
     }
 
     public int getCapaciteAccueil() {
@@ -60,8 +57,6 @@ public class Etablissement {
     public List<Etudiant> getCandidatsAcceptes() {
         return candidatsAcceptes;
     }
-
-
 
     @Override
     public String toString()
@@ -83,6 +78,26 @@ public class Etablissement {
         }
 
         return res.toString();
+    }
+    /* =========================================================================================
+     *  Méthodes implémentées dans la cadre de la génération de données
+     *  =========================================================================================
+     */
+
+    /**
+     * sert à la réinitialisation du compteur d'établissements lorsque l'on créera de nouveau une instance de {@link PlateformeCandidatures}
+     */
+    public static void reinitialiserCompteur()
+    {
+        compteurEtablissements = 0;
+    }
+
+    /**
+     *
+     * @param classement
+     */
+    public void setClassement(List<Etudiant> classement) {
+        this.classement = classement;
     }
 
     /* =========================================================================================
@@ -149,13 +164,51 @@ public class Etablissement {
      */
 
     /**
-     * mesure le degré de satisfaction pour un établissement.
-     * Formule : ( (nombre de candidats + 1) - (position candidat accepté dans le classement de l'établissement) ) / nombre de candidats.
+     * Mesure le degré de satisfaction pour un établissement.
+     * Formule : ((nombre de candidats) - (position du candidat accepté dans le classement de l'établissement)) / nombre de candidats.
      * /!\ cette formule est valide dans le cas où chaque établissement n'accepte qu'un candidat.
      * @return le degré de satisfaction d'un établissement
      */
     public float degreSatisfaction() {
+        float nbCandidats = (float) this.classement.size();
+        return (nbCandidats - this.classement.indexOf(this.candidatsAcceptes.get(0))) / nbCandidats;
+    }
+
+    /**
+     * calcule la somme du degré de satisfaction pour chacun des candidats acceptés au sein de l'établissement.
+     * @return la somme calculée.
+     */
+    public float sommeDegreSatisfaction() {
+        int nbCandidatsAcceptes = 0;
         float nbCandidats = this.classement.size();
-        return ((float) (nbCandidats - this.classement.indexOf(this.candidatsAcceptes.get(0)))) / nbCandidats;
+        float sommeSatisfactionEtudiantsAcceptes = 0;
+
+        for (Etudiant candidatAccepte :
+                candidatsAcceptes) {
+            sommeSatisfactionEtudiantsAcceptes += ((nbCandidats + nbCandidatsAcceptes - this.classement.indexOf(candidatAccepte))/nbCandidats);
+            nbCandidatsAcceptes++;
+        }
+
+        return sommeSatisfactionEtudiantsAcceptes;
+    }
+
+    /**
+     * calcule le degré de satisfaction de l'établissement selon le nombre de candidats acceptés.
+     * @return une mesure comprise dans l'intervalle [0 ; 1].
+     */
+    public float degreSatisfactionSelonNombreCandidatsAcceptes() {
+        if (this.candidatsAcceptes.isEmpty())
+            return 0.f;
+        return sommeDegreSatisfaction()/this.candidatsAcceptes.size();
+    }
+
+    /**
+     * calcule le degré de satisfaction de l'établissement selon sa capacité d'accueil.
+     * @return une mesure comprise dans l'intervalle [0 ; 1].
+     */
+    public float degreSatisfactionSelonCapaciteAccueil() {
+        if (this.candidatsAcceptes.isEmpty())
+            return 0.f;
+        return sommeDegreSatisfaction()/this.capaciteAccueil;
     }
 }

@@ -1,4 +1,4 @@
-package main;
+package modeles;
 
 import modeles.Etablissement;
 import modeles.Etudiant;
@@ -11,13 +11,14 @@ import java.util.Map;
 
 public class PlateformeCandidatures {
     /* ATTRIBUTS */
-    private String nom = "APB";
+    private final String nom = "Plateforme de Candidatures";
     private List<Etablissement> etablissements;
     private List<Etudiant> candidats;
 
-    /* CONSTRUCTEUR */
+    /* CONSTRUCTEURS */
     public PlateformeCandidatures(int nombreEtudiants, int nombreDePlacesMin, int nombreDePlacesMax, int nombreEtablissements) {
-        this.nom = nom;
+        Etudiant.reinitialiserCompteur();
+        Etablissement.reinitialiserCompteur();
         this.etablissements = new ArrayList<Etablissement>();
         this.candidats = new ArrayList<Etudiant>();
         this.genererCandidats(nombreEtudiants);
@@ -27,9 +28,23 @@ public class PlateformeCandidatures {
     }
 
     public PlateformeCandidatures() {
+        Etudiant.reinitialiserCompteur();
+        Etablissement.reinitialiserCompteur();
         this.etablissements = new ArrayList<Etablissement>();
         this.candidats = new ArrayList<Etudiant>();
         exempleDuCours();
+    }
+
+    public List<Etablissement> getEtablissements() {
+        return etablissements;
+    }
+
+    public List<Etudiant> getCandidats() {
+        return candidats;
+    }
+
+    public String getNom() {
+        return nom;
     }
 
     /**
@@ -60,7 +75,7 @@ public class PlateformeCandidatures {
     }
 
     /**
-     * Génère pour chaque étudiant sa liste de voeux
+     * Génère pour chaque étudiant sa liste de vœux
      */
     private void genererVoeux()
     {
@@ -105,7 +120,7 @@ public class PlateformeCandidatures {
      * Met en application l'algorithme du mariage stable sur notre jeu de données.
      * Priorité : donnée aux établissements.
      */
-    public void mariageStableEtablissements()
+    public Sauvegarde mariageStableEtablissements()
     {
         while (!acceptationsTerminees())
         {
@@ -150,13 +165,14 @@ public class PlateformeCandidatures {
                 }
             }
         }
+        return new Sauvegarde(Sauvegarde.Priorite.ETABLISSEMENT, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(), degreSatisfactionEtablissementsSelonCapaciteAccueil());
     }
 
     /**
      * Met en application l'algorithme du mariage stable sur notre jeu de données.
      * Priorité : donnée aux étudiants.
      */
-    public void mariageStableEtudiants()
+    public Sauvegarde mariageStableEtudiants()
     {
         while (!acceptationsTerminees())
         {
@@ -217,6 +233,7 @@ public class PlateformeCandidatures {
                 }                
             }
         }
+        return new Sauvegarde(Sauvegarde.Priorite.ETUDIANT, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(), degreSatisfactionEtablissementsSelonCapaciteAccueil());
     }
 
     /**
@@ -292,8 +309,15 @@ public class PlateformeCandidatures {
      *  Méthodes implémentées dans la cadre du calcul de la satisfaction
      *  =========================================================================================
      */
+
+    /**
+     * Calcule le degré de satisfaction globale des étudiants.
+     * @return une mesure comprise dans l'intervalle [0 ; 1].
+     */
     public float degreSatisfactionEtudiants() {
         float satisfactionGlobale = 0;
+        if (this.candidats.isEmpty())
+            return 0.f;
         for (Etudiant etudiant :
                 this.candidats) {
             satisfactionGlobale += etudiant.degreSatisfaction();
@@ -301,8 +325,11 @@ public class PlateformeCandidatures {
         return satisfactionGlobale/this.candidats.size();
     }
 
+
     public float degreSatisfactionEtablissements() {
         float satisfactionGlobale = 0;
+        if (this.etablissements.isEmpty())
+            return 0.f;
         for (Etablissement etablissement :
                 this.etablissements) {
             satisfactionGlobale += etablissement.degreSatisfaction();
@@ -310,10 +337,40 @@ public class PlateformeCandidatures {
         return satisfactionGlobale/this.etablissements.size();
     }
 
-    public Sauvegarde sauvegarder(Sauvegarde.Priorite priorite)
-    {
-        return  new Sauvegarde(priorite, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissements());
+    /**
+     * Calcule le degré de satisfaction globale des établissements selon le nombre de candidats acceptés.
+     * @return une mesure comprise dans l'intervalle [0 ; 1].
+     */
+    public float degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes() {
+        float satisfactionGlobale = 0;
+        if (this.etablissements.isEmpty())
+            return 0.f;
+        for (Etablissement etablissement :
+                this.etablissements) {
+            satisfactionGlobale += etablissement.degreSatisfactionSelonNombreCandidatsAcceptes();
+        }
+        return satisfactionGlobale/this.etablissements.size();
     }
+
+    /**
+     * Calcule le degré de satisfaction globale des établissements selon la capacité d'accueil.
+     * @return une mesure comprise dans l'intervalle [0 ; 1].
+     */
+    public float degreSatisfactionEtablissementsSelonCapaciteAccueil() {
+        float satisfactionGlobale = 0;
+        if (this.etablissements.isEmpty())
+            return 0.f;
+        for (Etablissement etablissement :
+                this.etablissements) {
+            satisfactionGlobale += etablissement.degreSatisfactionSelonCapaciteAccueil();
+        }
+        return satisfactionGlobale/this.etablissements.size();
+    }
+
+    /*public Sauvegarde sauvegarder(Sauvegarde.Priorite priorite)
+    {
+        return new Sauvegarde(priorite, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(), degreSatisfactionEtablissementsSelonCapaciteAccueil());
+    }*/
 
     /* =========================================================================================
      *  Pour mettre en place un jeu de données correspondant à l'exemple du cours

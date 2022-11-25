@@ -1,9 +1,7 @@
 package modeles;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Sauvegarde {
     public enum Priorite {
@@ -21,13 +19,13 @@ public class Sauvegarde {
             return "Priorité aux " + this.type;
         }
     }
-//    private String methodeUtilisee;
     private Priorite priorite;
     private Map<Etablissement, List<Etudiant>> associations;
     private float degreSatisfactionEtudiant;
-    private float degreSatisfactionEtablissement;
+    private float degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes;
+    private float degreSatisfactionEtablissementsSelonCapaciteAccueil;
 
-    public  Sauvegarde(Priorite priorite, List<Etablissement> etablissements, float degreSatisfactionEtudiant, float degreSatisfactionEtablissement)
+    public  Sauvegarde(Priorite priorite, List<Etablissement> etablissements, float degreSatisfactionEtudiant, float degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes, float degreSatisfactionEtablissementsSelonCapaciteAccueil)
     {
 //        this.methodeUtilisee = methodeUtilisee;
         this.priorite = priorite;
@@ -39,15 +37,55 @@ public class Sauvegarde {
             associations.put(etablissement, etudiants);
         }
         this.degreSatisfactionEtudiant = degreSatisfactionEtudiant;
-        this.degreSatisfactionEtablissement = degreSatisfactionEtablissement;
+        this.degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes = degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes;
+        this.degreSatisfactionEtablissementsSelonCapaciteAccueil = degreSatisfactionEtablissementsSelonCapaciteAccueil;
     }
+
+    public Priorite getPriorite() {
+        return priorite;
+    }
+
+    public Map<Etablissement, List<Etudiant>> getAssociations() {
+        return associations;
+    }
+
+    /*
+    public void lectureEtablissementCandidats() {
+        this.associations
+                .entrySet()
+                .stream()
+                .forEach(association -> {
+                    association.getKey().getId(); // à remplacer par la méthode de remplissage du tableau de l'interface graphique
+                    for (Etudiant candidat :
+                            association.getValue()) {
+                        candidat.getId(); // à remplacer par la méthode de remplissage du tableau de l'interface graphique
+                    }
+                });
+    }
+
+    public void lectureCandidatEtablissement() {
+        this.associations
+                .entrySet()
+                .stream()
+                .forEach(association -> {
+                    for (Etudiant candidatAccepte :
+                            association.getKey().getCandidatsAcceptes()) {
+                        candidatAccepte.getListeVoeux(); // à remplacer par la méthode de remplissage du tableau de l'interface graphique
+                    }
+                });
+    }
+    */
 
     public float getDegreSatisfactionEtudiant() {
         return degreSatisfactionEtudiant;
     }
 
-    public float getDegreSatisfactionEtablissement() {
-        return degreSatisfactionEtablissement;
+    public float getDegreSatisfactionEtablissementsSelonNombreCandidatsAcceptes() {
+        return degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes;
+    }
+
+    public float getDegreSatisfactionEtablissementsSelonCapaciteAccueil() {
+        return degreSatisfactionEtablissementsSelonCapaciteAccueil;
     }
 
     public String toString()
@@ -73,7 +111,8 @@ public class Sauvegarde {
             res.append("]\n");
         }
         res.append("degré satisfaction étudiant : "+String.format("%.02f", this.degreSatisfactionEtudiant)+"\n");
-        res.append("degré satisfaction établissement : "+String.format("%.02f", this.degreSatisfactionEtablissement)+"\n");
+        res.append("degré satisfaction établissement selon nombre candidats acceptés : "+String.format("%.02f", this.degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes)+"\n");
+        res.append("degré satisfaction établissement selon capacité accueil: "+String.format("%.02f", this.degreSatisfactionEtablissementsSelonCapaciteAccueil)+"\n");
         return res.toString();
     }
 }
