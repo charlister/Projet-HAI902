@@ -8,6 +8,7 @@ public class Etudiant {
     /* ATTRIBUTS */
     private static long compteurEtudiants = 0;
     private long id;
+    private String nom;
     private List<Etablissement> listeVoeux;
     private boolean affecte;
     private Etablissement etablissementAffecte;
@@ -31,6 +32,10 @@ public class Etudiant {
     /* ACCESSEURS */
     public long getId() {
         return id;
+    }
+
+    public String getNom() {
+        return "Etudiant"+this.id;
     }
 
     public List<Etablissement> getListeVoeux() {
@@ -100,7 +105,7 @@ public class Etudiant {
 
     /**
      * Permet d'obtenir l'établissement le plus souhaité par l'étudiant en prenant en compte ses refus
-     * @return etablissement, voeu actuel
+     * @return etablissement, vœu actuel
      */
     public Etablissement voeuActuel()
     {
@@ -119,7 +124,7 @@ public class Etudiant {
 
     /**
      * Permet de désaffecter un étudiant de son établissement, après avoir été accepté temporairement.
-     * Le voeu le plus souhaité devient alors le prochain dans sa liste de voeu, que l'on gère avec le curseur
+     * Le vœu le plus souhaité devient alors le prochain dans sa liste de vœu, que l'on gère avec le curseur
      * "voeuEtudie"
      */
     public void desaffecter()
@@ -155,12 +160,12 @@ public class Etudiant {
      */
 
     /**
-     * mesure le degré de satisfaction pour un étudiant (candidat).
-     * Formule : ( (nombre de voeux + 1) - (position de l'établissement affecté dans la liste de voeux) ) / nombre de voeux.
+     * Mesure le degré de satisfaction pour un étudiant (candidat).
+     * Formule : ((nombre de voeux) - (position de l'établissement affecté dans la liste de vœux)) / nombre de voeux.
      * @return le degré de satisfaction pour un étudiant
      */
     public float degreSatisfaction() {
-        float nbVoeux = this.listeVoeux.size();
-        return ((float) (nbVoeux - this.voeuEtudie)) / nbVoeux;
+        float nbVoeux = (float) this.listeVoeux.size();
+        return (nbVoeux - this.voeuEtudie) / nbVoeux;
     }
 }

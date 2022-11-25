@@ -8,6 +8,7 @@ public class Etablissement {
     /* ATTRIBUTES */
     private static long compteurEtablissements = 0;
     private long id;
+    private String nom;
     private int capaciteAccueil;
     private List<Etudiant> classement, candidatsAcceptes;
 
@@ -37,12 +38,12 @@ public class Etablissement {
     }
 
     /* ACCESSEURS */
-    public static long getCompteurEtablissements() {
-        return compteurEtablissements;
-    }
-
     public long getId() {
         return id;
+    }
+
+    public String getNom() {
+        return "Etablissement"+this.id;
     }
 
     public int getCapaciteAccueil() {
@@ -169,8 +170,8 @@ public class Etablissement {
      * @return le degré de satisfaction d'un établissement
      */
     public float degreSatisfaction() {
-        float nbCandidats = this.classement.size();
-        return ((float) (nbCandidats - this.classement.indexOf(this.candidatsAcceptes.get(0)))) / nbCandidats;
+        float nbCandidats = (float) this.classement.size();
+        return (nbCandidats - this.classement.indexOf(this.candidatsAcceptes.get(0))) / nbCandidats;
     }
 
     /**

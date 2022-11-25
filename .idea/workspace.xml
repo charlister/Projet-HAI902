@@ -4,14 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="question 6">
+    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="gestion des sauvegardes et amélioration méthodes de calcul de priorité selon établissements (prise en compte de plusieurs candidats acceptés)">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/PlateformeCandidatures.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/modeles/Etablissement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/Etablissement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modeles/Etudiant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/Etudiant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/modeles/Sauvegarde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/Sauvegarde.java" afterDir="false" />
     </list>
-    <list id="44aee43e-db1c-40d6-8ce6-bef9446efca2" name="Changes by Scooby" comment="Changes by Scooby" />
+    <list id="4711f7f3-b136-4779-b438-fd4aa312aa11" name="Changes by Scooby" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/PlateformeCandidatures.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modeles/Etablissement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/Etablissement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/modeles/Etudiant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/Etudiant.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,12 +27,51 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/modeles/PlateformeCandidatures.java">
+      <ranges>
+        <range start1="0" end1="1" start2="0" end2="1" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="13" end1="14" start2="13" end2="14" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="17" end1="18" start2="17" end2="18" changelist="4711f7f3-b136-4779-b438-fd4aa312aa11" />
+        <range start1="19" end1="20" start2="19" end2="21" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="29" end1="29" start2="30" end2="32" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="33" end1="33" start2="36" end2="48" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="62" end1="63" start2="77" end2="78" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="312" end1="312" start2="327" end2="339" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/modeles/Etudiant.java">
+      <ranges>
+        <range start1="10" end1="10" start2="10" end2="11" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="15" end1="16" start2="16" end2="17" changelist="4711f7f3-b136-4779-b438-fd4aa312aa11" />
+        <range start1="29" end1="39" start2="30" end2="30" changelist="4711f7f3-b136-4779-b438-fd4aa312aa11" />
+        <range start1="44" end1="44" start2="35" end2="39" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="82" end1="82" start2="77" end2="100" changelist="4711f7f3-b136-4779-b438-fd4aa312aa11" />
+        <range start1="89" end1="90" start2="107" end2="108" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="108" end1="109" start2="126" end2="127" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="144" end1="146" start2="162" end2="164" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="149" end1="151" start2="167" end2="169" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/modeles/Etablissement.java">
+      <ranges>
+        <range start1="10" end1="10" start2="10" end2="11" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="20" end1="24" start2="21" end2="21" changelist="4711f7f3-b136-4779-b438-fd4aa312aa11" />
+        <range start1="43" end1="47" start2="40" end2="40" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="50" end1="50" start2="43" end2="47" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+        <range start1="62" end1="64" start2="59" end2="59" changelist="4711f7f3-b136-4779-b438-fd4aa312aa11" />
+        <range start1="86" end1="86" start2="81" end2="101" changelist="4711f7f3-b136-4779-b438-fd4aa312aa11" />
+        <range start1="157" end1="159" start2="172" end2="174" changelist="fc55d5cf-aa99-498a-9a2b-783196ff05a5" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -59,7 +105,7 @@
       <module name="Projet-HAI902" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.*" />
+          <option name="PATTERN" value="modeles.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -88,7 +134,7 @@
       <workItem from="1669231861932" duration="7729000" />
       <workItem from="1669306228176" duration="4726000" />
       <workItem from="1669370230291" duration="437000" />
-      <workItem from="1669375199643" duration="6630000" />
+      <workItem from="1669375199643" duration="13717000" />
     </task>
     <task id="LOCAL-00001" summary="Sauvegarde résultats après application algorithme mariage stable">
       <created>1669238401628</created>
@@ -132,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669336986475</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="gestion des sauvegardes et amélioration méthodes de calcul de priorité selon établissements (prise en compte de plusieurs candidats acceptés)">
+      <created>1669382025776</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669382025776</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +207,7 @@
     <MESSAGE value="Sauvegarde résultats après application algorithme mariage stable" />
     <MESSAGE value="tri priorité aux étudiants et priorité aux établissements selon l’ordre décroissant de satisfaction globale des étudiants (resp. établissement) par rapport à chaque jeu de données" />
     <MESSAGE value="question 6" />
-    <option name="LAST_COMMIT_MESSAGE" value="question 6" />
+    <MESSAGE value="gestion des sauvegardes et amélioration méthodes de calcul de priorité selon établissements (prise en compte de plusieurs candidats acceptés)" />
+    <option name="LAST_COMMIT_MESSAGE" value="gestion des sauvegardes et amélioration méthodes de calcul de priorité selon établissements (prise en compte de plusieurs candidats acceptés)" />
   </component>
 </project>

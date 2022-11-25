@@ -1,5 +1,6 @@
 package main;
 
+import modeles.PlateformeCandidatures;
 import modeles.Sauvegarde;
 
 import java.util.ArrayList;
@@ -68,7 +69,8 @@ public class Test {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        PlateformeCandidatures testCours = new PlateformeCandidatures(5, 1, 1, 5);
+        PlateformeCandidatures testCours = new PlateformeCandidatures(100, 1, 1, 100);
+//        PlateformeCandidatures testCours = new PlateformeCandidatures();
 
         System.out.println(testCours);
 
@@ -77,6 +79,7 @@ public class Test {
         Sauvegarde sauvegardeCoursEtab = testCours.mariageStableEtablissements();
         System.err.println("Sauvegarde priorité établissement");
         System.out.println(sauvegardeCoursEtab);
+        System.err.println(String.format("Sauvegarde priorité établissement (/!\\ à ne considérer que lorsque le nombre de place pour chaque établissement est de 1 : %.02f", testCours.degreSatisfactionEtablissements()));
         //testCours.affichageAffectations();
         Thread.sleep(2000);
 
@@ -85,6 +88,7 @@ public class Test {
         Sauvegarde sauvegardeCoursEtu = testCours.mariageStableEtudiants();
         System.err.println("Sauvegarde priorité étudiant");
         System.out.println(sauvegardeCoursEtu);
+        System.err.println(String.format("Sauvegarde priorité établissement (/!\\ à ne considérer que lorsque le nombre de place pour chaque établissement est de 1 : %.02f", testCours.degreSatisfactionEtablissements()));
         //testCours.affichageAffectations();
         Thread.sleep(2000);
 

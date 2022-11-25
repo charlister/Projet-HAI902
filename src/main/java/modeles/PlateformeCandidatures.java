@@ -1,4 +1,4 @@
-package main;
+package modeles;
 
 import modeles.Etablissement;
 import modeles.Etudiant;
@@ -11,13 +11,14 @@ import java.util.Map;
 
 public class PlateformeCandidatures {
     /* ATTRIBUTS */
-    private String nom = "APB";
+    private final String nom = "Plateforme de Candidatures";
     private List<Etablissement> etablissements;
     private List<Etudiant> candidats;
 
     /* CONSTRUCTEURS */
     public PlateformeCandidatures(int nombreEtudiants, int nombreDePlacesMin, int nombreDePlacesMax, int nombreEtablissements) {
-        this.nom = nom;
+        Etudiant.reinitialiserCompteur();
+        Etablissement.reinitialiserCompteur();
         this.etablissements = new ArrayList<Etablissement>();
         this.candidats = new ArrayList<Etudiant>();
         this.genererCandidats(nombreEtudiants);
@@ -27,9 +28,23 @@ public class PlateformeCandidatures {
     }
 
     public PlateformeCandidatures() {
+        Etudiant.reinitialiserCompteur();
+        Etablissement.reinitialiserCompteur();
         this.etablissements = new ArrayList<Etablissement>();
         this.candidats = new ArrayList<Etudiant>();
         exempleDuCours();
+    }
+
+    public List<Etablissement> getEtablissements() {
+        return etablissements;
+    }
+
+    public List<Etudiant> getCandidats() {
+        return candidats;
+    }
+
+    public String getNom() {
+        return nom;
     }
 
     /**
@@ -60,7 +75,7 @@ public class PlateformeCandidatures {
     }
 
     /**
-     * Génère pour chaque étudiant sa liste de voeux
+     * Génère pour chaque étudiant sa liste de vœux
      */
     private void genererVoeux()
     {
@@ -308,6 +323,18 @@ public class PlateformeCandidatures {
             satisfactionGlobale += etudiant.degreSatisfaction();
         }
         return satisfactionGlobale/this.candidats.size();
+    }
+
+
+    public float degreSatisfactionEtablissements() {
+        float satisfactionGlobale = 0;
+        if (this.etablissements.isEmpty())
+            return 0.f;
+        for (Etablissement etablissement :
+                this.etablissements) {
+            satisfactionGlobale += etablissement.degreSatisfaction();
+        }
+        return satisfactionGlobale/this.etablissements.size();
     }
 
     /**
