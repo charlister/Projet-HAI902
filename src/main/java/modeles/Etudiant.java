@@ -7,26 +7,23 @@ import java.util.List;
 public class Etudiant {
     /* ATTRIBUTS */
     private static long compteurEtudiants = 0;
-    private long id;
+    private final long id;
     private String nom;
-    private List<Etablissement> listeVoeux;
+    private final List<Etablissement> listeVoeux;
     private boolean affecte;
-    private Etablissement etablissementAffecte;
     private int voeuEtudie = 0;
 
     /* CONSTRUCTEURS */
     public Etudiant() {
         this.id = ++compteurEtudiants;
         this.affecte = false;
-        this.etablissementAffecte = null;
-        this.listeVoeux = new ArrayList<Etablissement>();
+        this.listeVoeux = new ArrayList<>();
     }
 
-    public Etudiant(long id, List<Etablissement> listeVoeux, boolean estAffecte, Etablissement etablissementAffecte) {
+    public Etudiant(long id, List<Etablissement> listeVoeux, boolean estAffecte) {
         this.id = id;
         this.listeVoeux = listeVoeux;
         this.affecte = estAffecte;
-        this.etablissementAffecte = etablissementAffecte;
     }
 
     /* ACCESSEURS */
@@ -46,8 +43,9 @@ public class Etudiant {
         return affecte;
     }
 
-    public Etablissement getEtablissementAffecte() {
-        return etablissementAffecte;
+    public Etablissement getEtablissementAffecte()
+    {
+        return this.getListeVoeux().get(voeuEtudie);
     }
 
     /**
@@ -118,7 +116,6 @@ public class Etudiant {
      */
     public void setAffectation(Etablissement etablissement)
     {
-        this.etablissementAffecte = etablissement;
         this.affecte = true;
     }
 
@@ -129,7 +126,6 @@ public class Etudiant {
      */
     public void desaffecter()
     {
-        this.etablissementAffecte = null;
         this.affecte = false;
         this.voeuEtudie++;
     }
@@ -151,7 +147,6 @@ public class Etudiant {
     {
         this.voeuEtudie = 0;
         this.affecte = false;
-        this.etablissementAffecte = null;
     }
 
     /* =========================================================================================

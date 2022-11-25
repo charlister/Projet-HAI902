@@ -399,9 +399,9 @@ public class PlateformeCandidatures {
         preferencesEtudiant3.add(etablissement1);
         preferencesEtudiant3.add(etablissement2);
         preferencesEtudiant3.add(etablissement3);
-        Etudiant etudiant1 = new Etudiant(1, preferencesEtudiant1, false, null);
-        Etudiant etudiant2 = new Etudiant(2, preferencesEtudiant2, false, null);
-        Etudiant etudiant3 = new Etudiant(3, preferencesEtudiant3, false, null);
+        Etudiant etudiant1 = new Etudiant(1, preferencesEtudiant1, false);
+        Etudiant etudiant2 = new Etudiant(2, preferencesEtudiant2, false);
+        Etudiant etudiant3 = new Etudiant(3, preferencesEtudiant3, false);
         candidats.add(etudiant1);
         candidats.add(etudiant2);
         candidats.add(etudiant3);
