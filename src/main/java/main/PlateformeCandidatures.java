@@ -2,6 +2,7 @@ package main;
 
 import modeles.Etablissement;
 import modeles.Etudiant;
+import modeles.Sauvegarde;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -251,7 +252,7 @@ public class PlateformeCandidatures {
     {
         for (Etudiant etudiant : candidats)
         {
-            System.out.println("Etudiant"+etudiant.getId() + ", affectation : Etablissement[capacite : " + etudiant.getEtablissementAffecte().getCapaciteAccueil()+ "]" + etudiant.getEtablissementAffecte().getId());
+            System.out.println("Etudiant"+etudiant.getId() + ", affectation : Etablissement[capacite : " + etudiant.getEtablissementAffecte().getCapaciteAccueil()+ "]" + etudiant.getEtablissementAffecte().getId() + "\n");
         }
     }
 
@@ -307,6 +308,11 @@ public class PlateformeCandidatures {
             satisfactionGlobale += etablissement.degreSatisfaction();
         }
         return satisfactionGlobale/this.etablissements.size();
+    }
+
+    public Sauvegarde sauvegarder(Sauvegarde.Priorite priorite)
+    {
+        return  new Sauvegarde(priorite, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissements());
     }
 
     /* =========================================================================================
