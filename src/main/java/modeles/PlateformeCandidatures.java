@@ -15,7 +15,7 @@ public class PlateformeCandidatures {
     private List<Etablissement> etablissements;
     private List<Etudiant> candidats;
 
-    /* CONSTRUCTEUR */
+    /* CONSTRUCTEURS */
     public PlateformeCandidatures(int nombreEtudiants, int nombreDePlacesMin, int nombreDePlacesMax, int nombreEtablissements) {
         this.nom = nom;
         this.etablissements = new ArrayList<Etablissement>();

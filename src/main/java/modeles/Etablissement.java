@@ -19,10 +19,6 @@ public class Etablissement {
         this.candidatsAcceptes = new ArrayList<Etudiant>();
     }
 
-    public void setClassement(List<Etudiant> classement) {
-        this.classement = classement;
-    }
-
     public Etablissement(long id, int capaciteAccueil, List<Etudiant> classement, List<Etudiant> candidatsAcceptes) {
         this.id = id;
         this.capaciteAccueil = capaciteAccueil;
@@ -61,8 +57,6 @@ public class Etablissement {
         return candidatsAcceptes;
     }
 
-
-
     @Override
     public String toString()
     {
@@ -83,6 +77,26 @@ public class Etablissement {
         }
 
         return res.toString();
+    }
+    /* =========================================================================================
+     *  Méthodes implémentées dans la cadre de la génération de données
+     *  =========================================================================================
+     */
+
+    /**
+     * sert à la réinitialisation du compteur d'établissements lorsque l'on créera de nouveau une instance de {@link PlateformeCandidatures}
+     */
+    public static void reinitialiserCompteur()
+    {
+        compteurEtablissements = 0;
+    }
+
+    /**
+     *
+     * @param classement
+     */
+    public void setClassement(List<Etudiant> classement) {
+        this.classement = classement;
     }
 
     /* =========================================================================================

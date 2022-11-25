@@ -13,7 +13,7 @@ public class Etudiant {
     private Etablissement etablissementAffecte;
     private int voeuEtudie = 0;
 
-    /* CONSTRUCTEUR */
+    /* CONSTRUCTEURS */
     public Etudiant() {
         this.id = ++compteurEtudiants;
         this.affecte = false;
@@ -26,16 +26,6 @@ public class Etudiant {
         this.listeVoeux = listeVoeux;
         this.affecte = estAffecte;
         this.etablissementAffecte = etablissementAffecte;
-    }
-
-    /**
-     * Génère tous les etablissements dans la liste de voeux ordonnés de manière aléatoire
-     * @param etablissements liste de tous les établissements, passé en paramètre
-     */
-    public void genererVoeux(List<Etablissement> etablissements)
-    {
-        this.listeVoeux.addAll(etablissements);
-        Collections.shuffle(this.listeVoeux);
     }
 
     /* ACCESSEURS */
@@ -78,6 +68,29 @@ public class Etudiant {
             res.append("]\n");
         }
         return res.toString();
+    }
+
+    /* =========================================================================================
+     *  Méthodes implémentées dans la cadre de la génération de données
+     *  =========================================================================================
+     */
+
+    /**
+     * sert à la réinitialisation du compteur d'établissements lorsque l'on créera de nouveau une instance de {@link PlateformeCandidatures}
+     */
+    public static void reinitialiserCompteur()
+    {
+        compteurEtudiants = 0;
+    }
+
+    /**
+     * Génère tous les etablissements dans la liste de voeux ordonnés de manière aléatoire
+     * @param etablissements liste de tous les établissements, passé en paramètre
+     */
+    public void genererVoeux(List<Etablissement> etablissements)
+    {
+        this.listeVoeux.addAll(etablissements);
+        Collections.shuffle(this.listeVoeux);
     }
 
     /* =========================================================================================
