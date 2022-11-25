@@ -25,9 +25,10 @@ public class Sauvegarde {
     private Priorite priorite;
     private Map<Etablissement, List<Etudiant>> associations;
     private float degreSatisfactionEtudiant;
-    private float degreSatisfactionEtablissement;
+    private float degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes;
+    private float degreSatisfactionEtablissementsSelonCapaciteAccueil;
 
-    public  Sauvegarde(Priorite priorite, List<Etablissement> etablissements, float degreSatisfactionEtudiant, float degreSatisfactionEtablissement)
+    public  Sauvegarde(Priorite priorite, List<Etablissement> etablissements, float degreSatisfactionEtudiant, float degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes, float degreSatisfactionEtablissementsSelonCapaciteAccueil)
     {
 //        this.methodeUtilisee = methodeUtilisee;
         this.priorite = priorite;
@@ -39,15 +40,20 @@ public class Sauvegarde {
             associations.put(etablissement, etudiants);
         }
         this.degreSatisfactionEtudiant = degreSatisfactionEtudiant;
-        this.degreSatisfactionEtablissement = degreSatisfactionEtablissement;
+        this.degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes = degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes;
+        this.degreSatisfactionEtablissementsSelonCapaciteAccueil = degreSatisfactionEtablissementsSelonCapaciteAccueil;
     }
 
     public float getDegreSatisfactionEtudiant() {
         return degreSatisfactionEtudiant;
     }
 
-    public float getDegreSatisfactionEtablissement() {
-        return degreSatisfactionEtablissement;
+    public float getDegreSatisfactionEtablissementsSelonNombreCandidatsAcceptes() {
+        return degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes;
+    }
+
+    public float getDegreSatisfactionEtablissementsSelonCapaciteAccueil() {
+        return degreSatisfactionEtablissementsSelonCapaciteAccueil;
     }
 
     public String toString()
@@ -73,7 +79,8 @@ public class Sauvegarde {
             res.append("]\n");
         }
         res.append("degré satisfaction étudiant : "+String.format("%.02f", this.degreSatisfactionEtudiant)+"\n");
-        res.append("degré satisfaction établissement : "+String.format("%.02f", this.degreSatisfactionEtablissement)+"\n");
+        res.append("degré satisfaction établissement selon nombre candidats acceptés : "+String.format("%.02f", this.degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes)+"\n");
+        res.append("degré satisfaction établissement selon capacité accueil: "+String.format("%.02f", this.degreSatisfactionEtablissementsSelonCapaciteAccueil)+"\n");
         return res.toString();
     }
 }
