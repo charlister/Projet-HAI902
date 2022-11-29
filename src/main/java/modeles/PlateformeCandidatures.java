@@ -1,9 +1,5 @@
 package modeles;
 
-import modeles.Etablissement;
-import modeles.Etudiant;
-import modeles.Sauvegarde;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +7,8 @@ import java.util.Map;
 
 public class PlateformeCandidatures {
     /* ATTRIBUTS */
-    private final String nom = "Plateforme de Candidatures";
-    private List<Etablissement> etablissements;
+    private String nom = "Plateforme de Candidatures";
+    private final List<Etablissement> etablissements;
     private List<Etudiant> candidats;
 
     /* CONSTRUCTEURS */
@@ -111,7 +107,7 @@ public class PlateformeCandidatures {
         return result.toString();
     }
 
-    /* =========================================================================================
+    /* ==========================================================================================
      *  Méthodes implémentées dans la cadre de la mise en place de l'algorithme du mariage stable
      *  =========================================================================================
      */
@@ -119,121 +115,83 @@ public class PlateformeCandidatures {
     /**
      * Met en application l'algorithme du mariage stable sur notre jeu de données.
      * Priorité : donnée aux établissements.
+     * @return une sauvegarde représentant les couples d'associations obtenues à la fin de l'algorithme.
      */
     public Sauvegarde mariageStableEtablissements()
     {
         while (!acceptationsTerminees())
         {
-            for (Etudiant etudiant : this.candidats)
-            {
-                /* TRACAGE
-                System.out.println("ETAPE1 - Etudiant"+etudiant.getId()+ ", premiervoeu : Etablissement" + etudiant.getPremierVoeux().getId() + ", voeux restants : ["  );
-                for (Etablissement etablissement : etudiant.getListeVoeux())
-                {
-                    System.out.print(etablissement.getId() + ",");
-                }
-                System.out.print("]\n");*/
+            for (Etudiant etudiant : this.candidats) {
+                // Rien à faire si le candidat est déjà affecté temporairement.
                 if (!etudiant.estAffecte()) {
                     Etablissement voeu = etudiant.voeuActuel();
-                    /* TRACAGE
-                    System.out.println("ETAPE PAS AFFECTE - Etablissement" + voeu.getId() + ", candidatsAcceptes : ");
-                    for (Etudiant e : voeu.getCandidatsAcceptes())
-                    {
-                        System.out.print(e.getId() + ",");
-                    }*/
+                    // On ajoute l'étudiant à la liste des candidats acceptés temporairements si l'établissement a de
+                    // la place.
                     if (voeu.accueilPossible()) {
-                        // TRACAGE : System.out.println(voeu.getCandidatsAcceptes());
                         voeu.ajoutCandidat(etudiant);
                         etudiant.setAffectation(voeu);
-                    } else {
-                        // TRACAGE : System.out.println("ETAPE PEUT PAS ACCUEILLIR - Etablissement : " + voeu.getId() + ";" + voeu.getCandidatsAcceptes());
+                    }
+                    // Sinon, on ...
+                    else {
                         Etudiant cmp = voeu.dernierCandidat();
-                        // TRACAGE : System.out.println("Etudiant à comparer (moins bon) : Etudiant" + cmp.getId() + ", position : " + voeu.getPreferences().indexOf(cmp));
+                        // ... voit si le candidat étudié actuellement est plus souhaité que le moins souhaité des
+                        // candidats acceptés par l'établissement. Si oui, on désaffecte l'étudiant le moins bon et on
+                        // affecte le candidat étudié.
                         if (voeu.getPreferences().indexOf(cmp) > voeu.getPreferences().indexOf(etudiant)) {
-                            // TRACAGE : System.out.println("CAS NUMERO 2");
                             voeu.getCandidatsAcceptes().remove(cmp);
                             cmp.desaffecter();
                             voeu.ajoutCandidat(etudiant);
                             etudiant.setAffectation(voeu);
-                            // TRACAGE : System.out.println("Voeu"+ voeu.getId() + ", etu :" + voeu.getCandidatsAcceptes().get(0));
                         }
+                        // Sinon, on refuse l'étudiant.
                         else {
-                            // TRACAGE : System.out.println("CAS NUMERO 1");
                             etudiant.refuser();
                         }
                     }
                 }
             }
         }
-        return new Sauvegarde(Sauvegarde.Priorite.ETABLISSEMENT, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(), degreSatisfactionEtablissementsSelonCapaciteAccueil());
+        return new Sauvegarde(Sauvegarde.Priorite.ETABLISSEMENT, this.etablissements, degreSatisfactionEtudiants(),
+                degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(),
+                degreSatisfactionEtablissementsSelonCapaciteAccueil());
     }
 
     /**
      * Met en application l'algorithme du mariage stable sur notre jeu de données.
      * Priorité : donnée aux étudiants.
+     * @return une sauvegarde représentant les couples d'associations obtenues à la fin de l'algorithme.
      */
     public Sauvegarde mariageStableEtudiants()
     {
         while (!acceptationsTerminees())
         {
-            Map<Etablissement, List<Etudiant>> candidaturesTemporaires = new HashMap<Etablissement, List<Etudiant>>();
-            
-            // On établit, pour chaque établissement, une liste d'étudiants dont le souhait le plus élevé est de
-            // rejoindre ce dernier
-            for (Etudiant etudiant : this.candidats) {
-                /* TRACAGE
-                System.out.println("ETAPE1 - Etudiant"+etudiant.getId()+ ", premiervoeu : Etablissement" + etudiant.getPremierVoeux().getId() + ", voeux restants : ["  );
-                for (Etablissement etablissement : etudiant.getListeVoeux())
-                {
-                    System.out.print(etablissement.getId() + ",");
-                }
-                System.out.print("]\n");*/
-                if (!etudiant.estAffecte()) {
-                    Etablissement voeu = etudiant.voeuActuel();
-                    if (!candidaturesTemporaires.containsKey(voeu)) {
-                        List<Etudiant> etudiantsCandidats = new ArrayList<Etudiant>();
-                        candidaturesTemporaires.put(voeu, etudiantsCandidats);
-                    }
-                    /* TRACAGE
-                    System.out.println("ETAPE PAS AFFECTE - Etablissement" + voeu.getId() + ", candidatsAcceptes : ");
-                    for (Etudiant e : voeu.getCandidatsAcceptes())
-                    {
-                        System.out.print(e.getId() + ",");
-                    }*/
-                    if (voeu.accueilPossible()) {
-                        candidaturesTemporaires.get(voeu).add(etudiant);
-                        // TRACAGE : System.out.println(voeu.getCandidatsAcceptes());
-
-                    } else {
-                        // TRACAGE : System.out.println("CAS NUMERO 1");
-                        etudiant.refuser();
-                    }
-                }
-            }
-            
-            // Pour chaque établissement, on sélectionne les meilleurs ayant candidatés à ce tour, et on refuse les
-            // autres
-            for (Etablissement etablissement : candidaturesTemporaires.keySet())
+            for (Etablissement etablissement : etablissements)
             {
-                List<Etudiant> candidats = candidaturesTemporaires.get(etablissement);
-                int placesDisponibles = etablissement.getCapaciteAccueil() - etablissement.getCandidatsAcceptes().size();
-                
-                while ((placesDisponibles > 0) && (!candidats.isEmpty()))
+                if (etablissement.accueilPossible())
                 {
-                    Etudiant meilleur = etudiantChoisi(candidats, etablissement);
-                    etablissement.ajoutCandidat(meilleur);
-                    candidats.remove(meilleur);
-                    meilleur.setAffectation(etablissement);                    
-                    placesDisponibles--;
+                    Etudiant etudiantSouhaite = etablissement.getEtudiantSouhaite();
+                    // Si on propose un meilleur voeu à un étudiant
+                    if(!etudiantSouhaite.estAffecte())
+                    {
+                        etudiantSouhaite.setAffectation(etablissement);
+                        etablissement.ajoutCandidat(etudiantSouhaite);
+                    }
+                    else if(etudiantSouhaite.getListeVoeux().indexOf(etablissement) > etudiantSouhaite.getListeVoeux().indexOf(etudiantSouhaite.voeuActuel()))
+                    {
+                        Etablissement etablissementAComparer = etudiantSouhaite.voeuActuel();
+                        etablissementAComparer.desaffecter(etudiantSouhaite);
+                        etablissementAComparer.incrementerCandidatEtudie();
+                        etudiantSouhaite.setAffectation(etablissement);
+                        etablissement.ajoutCandidat(etudiantSouhaite);
+                    } else {
+                        etablissement.incrementerCandidatEtudie();
+                    }
                 }
-
-                for (Etudiant etudiant : candidats)
-                {
-                    etudiant.refuser();
-                }                
             }
         }
-        return new Sauvegarde(Sauvegarde.Priorite.ETUDIANT, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(), degreSatisfactionEtablissementsSelonCapaciteAccueil());
+        return new Sauvegarde(Sauvegarde.Priorite.ETUDIANT, this.etablissements, degreSatisfactionEtudiants(),
+                degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(),
+                degreSatisfactionEtablissementsSelonCapaciteAccueil());
     }
 
     /**
@@ -241,7 +199,7 @@ public class PlateformeCandidatures {
      * @param etudiants
      * @param etablissement
      * @return
-     */    
+     */
     private static Etudiant etudiantChoisi(List<Etudiant> etudiants, Etablissement etablissement)
     {
         Etudiant meilleur = null;
@@ -260,7 +218,7 @@ public class PlateformeCandidatures {
         }
 
         return meilleur;        
-    } 
+    }
 
     /**
      * Permet d'afficher pour chaque candidat son affectation

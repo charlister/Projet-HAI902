@@ -10,6 +10,7 @@ public class Etablissement {
     private long id;
     private String nom;
     private int capaciteAccueil;
+    private int candidatEtudie = 0;
     private List<Etudiant> classement, candidatsAcceptes;
 
     /* CONSTRUCTEURS */
@@ -40,6 +41,10 @@ public class Etablissement {
     /* ACCESSEURS */
     public long getId() {
         return id;
+    }
+
+    public int getCandidatEtudie() {
+        return candidatEtudie;
     }
 
     public String getNom() {
@@ -149,6 +154,27 @@ public class Etablissement {
         }
         return dernier;
     }
+
+    public void incrementerCandidatEtudie()
+    {
+        candidatEtudie++;
+    }
+
+    public int nombrePlaces()
+    {
+        return capaciteAccueil - candidatsAcceptes.size();
+    }
+
+    public Etudiant getEtudiantSouhaite()
+    {
+        return this.classement.get(candidatEtudie);
+    }
+
+    public void desaffecter(Etudiant etudiant)
+    {
+        candidatsAcceptes.remove(etudiant);
+    }
+
 
     /**
      * Permet de restaurer notre jeu de données pour être capable de lui appliquer une nouvelle affectation
