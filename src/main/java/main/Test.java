@@ -69,8 +69,8 @@ public class Test {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        PlateformeCandidatures testCours = new PlateformeCandidatures(100, 1, 1, 100);
-//        PlateformeCandidatures testCours = new PlateformeCandidatures();
+        PlateformeCandidatures testCours = new PlateformeCandidatures(5, 1, 1, 5);
+        //PlateformeCandidatures testCours = new PlateformeCandidatures();
 
         System.out.println(testCours);
 

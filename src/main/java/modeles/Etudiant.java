@@ -116,6 +116,7 @@ public class Etudiant {
      */
     public void setAffectation(Etablissement etablissement)
     {
+        this.voeuEtudie = listeVoeux.indexOf(etablissement);
         this.affecte = true;
     }
 

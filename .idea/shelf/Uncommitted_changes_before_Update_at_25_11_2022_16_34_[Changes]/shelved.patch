@@ -1,0 +1,118 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"fc55d5cf-aa99-498a-9a2b-783196ff05a5\" name=\"Changes\" comment=\"Sauvegarde résultats après application algorithme mariage stable\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/main/Test.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/main/Test.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/modeles/Sauvegarde.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/modeles/Sauvegarde.java\" afterDir=\"false\" />\r\n    </list>\r\n    <list id=\"44aee43e-db1c-40d6-8ce6-bef9446efca2\" name=\"Changes by Scooby\" comment=\"Changes by Scooby\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HsCOouOYj4NcLRLdzvrG2HF2yE\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,\r\n    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Test\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"11\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"main.Test\" />\r\n      <module name=\"Projet-HAI902\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"main.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Test\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"fc55d5cf-aa99-498a-9a2b-783196ff05a5\" name=\"Changes\" comment=\"\" />\r\n      <created>1669064380978</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1669064380978</updated>\r\n      <workItem from=\"1669064382513\" duration=\"610000\" />\r\n      <workItem from=\"1669065451193\" duration=\"6436000\" />\r\n      <workItem from=\"1669146751727\" duration=\"7510000\" />\r\n      <workItem from=\"1669230071156\" duration=\"1530000\" />\r\n      <workItem from=\"1669231861932\" duration=\"7729000\" />\r\n      <workItem from=\"1669306228176\" duration=\"4511000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Sauvegarde résultats après application algorithme mariage stable\">\r\n      <created>1669238401628</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669238401628</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Changes by Scooby\">\r\n      <created>1669239139434</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669239139434</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Changes by Scooby\">\r\n      <created>1669239163067</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669239163068</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Sauvegarde résultats après application algorithme mariage stable\">\r\n      <created>1669239184172</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669239184172</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Sauvegarde résultats après application algorithme mariage stable\">\r\n      <created>1669239224916</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669239224916</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Changes by Scooby\" />\r\n    <MESSAGE value=\"Sauvegarde résultats après application algorithme mariage stable\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Sauvegarde résultats après application algorithme mariage stable\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 2f23be531b4759282c7093e526a7fe3f0d4be8f6)
++++ b/.idea/workspace.xml	(date 1669373768401)
+@@ -4,13 +4,11 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="Sauvegarde résultats après application algorithme mariage stable">
++    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="Question 2 &amp; 4 - mise au propre, version ETUDIANT et version ETABLISSEMENT">
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2022_18_35__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2022_18_35__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/PlateformeCandidatures.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Test.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/modeles/Sauvegarde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/Sauvegarde.java" afterDir="false" />
+     </list>
+-    <list id="44aee43e-db1c-40d6-8ce6-bef9446efca2" name="Changes by Scooby" comment="Changes by Scooby" />
++    <list id="fae8f0ca-4fcc-4617-b080-a3845123f5ef" name="Changes by senio" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -41,21 +39,20 @@
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+   }
+ }</component>
+   <component name="RunManager">
+     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+       <option name="MAIN_CLASS_NAME" value="main.Test" />
+-      <module name="Projet-HAI902" />
++      <module name="projet" />
+       <extension name="coverage">
+         <pattern>
+           <option name="PATTERN" value="main.*" />
+@@ -82,47 +79,16 @@
+       <updated>1669064380978</updated>
+       <workItem from="1669064382513" duration="610000" />
+       <workItem from="1669065451193" duration="6436000" />
+-      <workItem from="1669146751727" duration="7510000" />
+-      <workItem from="1669230071156" duration="1530000" />
+-      <workItem from="1669231861932" duration="7729000" />
+-      <workItem from="1669306228176" duration="4511000" />
++      <workItem from="1669146751727" duration="17032000" />
+     </task>
+-    <task id="LOCAL-00001" summary="Sauvegarde résultats après application algorithme mariage stable">
+-      <created>1669238401628</created>
++    <task id="LOCAL-00001" summary="Question 2 - premiere version">
++      <created>1669154614014</created>
+       <option name="number" value="00001" />
+       <option name="presentableId" value="LOCAL-00001" />
+       <option name="project" value="LOCAL" />
+-      <updated>1669238401628</updated>
+-    </task>
+-    <task id="LOCAL-00002" summary="Changes by Scooby">
+-      <created>1669239139434</created>
+-      <option name="number" value="00002" />
+-      <option name="presentableId" value="LOCAL-00002" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1669239139434</updated>
+-    </task>
+-    <task id="LOCAL-00003" summary="Changes by Scooby">
+-      <created>1669239163067</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1669239163068</updated>
+-    </task>
+-    <task id="LOCAL-00004" summary="Sauvegarde résultats après application algorithme mariage stable">
+-      <created>1669239184172</created>
+-      <option name="number" value="00004" />
+-      <option name="presentableId" value="LOCAL-00004" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1669239184172</updated>
+-    </task>
+-    <task id="LOCAL-00005" summary="Sauvegarde résultats après application algorithme mariage stable">
+-      <created>1669239224916</created>
+-      <option name="number" value="00005" />
+-      <option name="presentableId" value="LOCAL-00005" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1669239224916</updated>
++      <updated>1669154614014</updated>
+     </task>
+-    <option name="localTasksCounter" value="6" />
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -140,8 +106,8 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="Changes by Scooby" />
+-    <MESSAGE value="Sauvegarde résultats après application algorithme mariage stable" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Sauvegarde résultats après application algorithme mariage stable" />
++    <MESSAGE value="Question 2 - premiere version" />
++    <MESSAGE value="Question 2 &amp; 4 - mise au propre, version ETUDIANT et version ETABLISSEMENT" />
++    <option name="LAST_COMMIT_MESSAGE" value="Question 2 &amp; 4 - mise au propre, version ETUDIANT et version ETABLISSEMENT" />
+   </component>
+ </project>
+\ No newline at end of file

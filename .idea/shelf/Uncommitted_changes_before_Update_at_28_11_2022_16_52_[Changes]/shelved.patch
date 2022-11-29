@@ -1,0 +1,237 @@
+Index: src/main/java/modeles/PlateformeCandidatures.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package modeles;\r\n\r\nimport modeles.Etablissement;\r\nimport modeles.Etudiant;\r\nimport modeles.Sauvegarde;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\npublic class PlateformeCandidatures {\r\n    /* ATTRIBUTS */\r\n    private final String nom = \"Plateforme de Candidatures\";\r\n    private List<Etablissement> etablissements;\r\n    private List<Etudiant> candidats;\r\n\r\n    /* CONSTRUCTEURS */\r\n    public PlateformeCandidatures(int nombreEtudiants, int nombreDePlacesMin, int nombreDePlacesMax, int nombreEtablissements) {\r\n        Etudiant.reinitialiserCompteur();\r\n        Etablissement.reinitialiserCompteur();\r\n        this.etablissements = new ArrayList<Etablissement>();\r\n        this.candidats = new ArrayList<Etudiant>();\r\n        this.genererCandidats(nombreEtudiants);\r\n        this.genererEtablissements(nombreDePlacesMin, nombreDePlacesMax, nombreEtablissements);\r\n        this.genererVoeux();\r\n        this.genererClassement();\r\n    }\r\n\r\n    public PlateformeCandidatures() {\r\n        Etudiant.reinitialiserCompteur();\r\n        Etablissement.reinitialiserCompteur();\r\n        this.etablissements = new ArrayList<Etablissement>();\r\n        this.candidats = new ArrayList<Etudiant>();\r\n        exempleDuCours();\r\n    }\r\n\r\n    public List<Etablissement> getEtablissements() {\r\n        return etablissements;\r\n    }\r\n\r\n    public List<Etudiant> getCandidats() {\r\n        return candidats;\r\n    }\r\n\r\n    public String getNom() {\r\n        return nom;\r\n    }\r\n\r\n    /**\r\n     * Génére un ensemble de candidats pour la plateforme de candidature\r\n     * @param nombreEtudiants le nombre d'étudiants inscrits sur la plateforme\r\n     */\r\n    private void genererCandidats(int nombreEtudiants)\r\n    {\r\n        for (long i = 0; i<nombreEtudiants; i++) {\r\n            this.candidats.add(new Etudiant());\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Génère un ensemble d'établissements pour la plateforme de candidature\r\n     * @param nombreDePlacesMin est le nombre de places minimales dans un établissement\r\n     * @param nombreDePlacesMax est le nombre de places maximales dans un établissement\r\n     * @param nombreEtablissements est le nombre d'établissements à générer\r\n     */\r\n    private void genererEtablissements(int nombreDePlacesMin, int nombreDePlacesMax, int nombreEtablissements) {\r\n        long i = 0;\r\n        while (i < nombreEtablissements)\r\n        {\r\n            int capacite = nombreDePlacesMin + (int)(Math.random() * (Math.abs(nombreDePlacesMax - nombreDePlacesMin + 1)));\r\n            this.etablissements.add(new Etablissement(capacite));\r\n            i++;\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Génère pour chaque étudiant sa liste de vœux\r\n     */\r\n    private void genererVoeux()\r\n    {\r\n        for (Etudiant etudiant : this.candidats)\r\n        {\r\n            etudiant.genererVoeux(this.etablissements);\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Génère pour chaque etablissement sa liste d'étudiants par préférence\r\n     */\r\n    private void genererClassement()\r\n    {\r\n        for (Etablissement etablissement : this.etablissements)\r\n        {\r\n            etablissement.genererClassement(this.candidats);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        StringBuilder result = new StringBuilder();\r\n\r\n        for (Etudiant candidat : this.candidats) {\r\n            result.append(candidat.toString()+\"\\n\");\r\n        }\r\n\r\n        for (Etablissement etablissement : this.etablissements) {\r\n            result.append(etablissement.toString()+\"\\n\");\r\n        }\r\n\r\n        return result.toString();\r\n    }\r\n\r\n    /* =========================================================================================\r\n     *  Méthodes implémentées dans la cadre de la mise en place de l'algorithme du mariage stable\r\n     *  =========================================================================================\r\n     */\r\n\r\n    /**\r\n     * Met en application l'algorithme du mariage stable sur notre jeu de données.\r\n     * Priorité : donnée aux établissements.\r\n     */\r\n    public Sauvegarde mariageStableEtablissements()\r\n    {\r\n        while (!acceptationsTerminees())\r\n        {\r\n            for (Etudiant etudiant : this.candidats)\r\n            {\r\n                /* TRACAGE\r\n                System.out.println(\"ETAPE1 - Etudiant\"+etudiant.getId()+ \", premiervoeu : Etablissement\" + etudiant.getPremierVoeux().getId() + \", voeux restants : [\"  );\r\n                for (Etablissement etablissement : etudiant.getListeVoeux())\r\n                {\r\n                    System.out.print(etablissement.getId() + \",\");\r\n                }\r\n                System.out.print(\"]\\n\");*/\r\n                if (!etudiant.estAffecte()) {\r\n                    Etablissement voeu = etudiant.voeuActuel();\r\n                    /* TRACAGE\r\n                    System.out.println(\"ETAPE PAS AFFECTE - Etablissement\" + voeu.getId() + \", candidatsAcceptes : \");\r\n                    for (Etudiant e : voeu.getCandidatsAcceptes())\r\n                    {\r\n                        System.out.print(e.getId() + \",\");\r\n                    }*/\r\n                    if (voeu.accueilPossible()) {\r\n                        // TRACAGE : System.out.println(voeu.getCandidatsAcceptes());\r\n                        voeu.ajoutCandidat(etudiant);\r\n                        etudiant.setAffectation(voeu);\r\n                    } else {\r\n                        // TRACAGE : System.out.println(\"ETAPE PEUT PAS ACCUEILLIR - Etablissement : \" + voeu.getId() + \";\" + voeu.getCandidatsAcceptes());\r\n                        Etudiant cmp = voeu.dernierCandidat();\r\n                        // TRACAGE : System.out.println(\"Etudiant à comparer (moins bon) : Etudiant\" + cmp.getId() + \", position : \" + voeu.getPreferences().indexOf(cmp));\r\n                        if (voeu.getPreferences().indexOf(cmp) > voeu.getPreferences().indexOf(etudiant)) {\r\n                            // TRACAGE : System.out.println(\"CAS NUMERO 2\");\r\n                            voeu.getCandidatsAcceptes().remove(cmp);\r\n                            cmp.desaffecter();\r\n                            voeu.ajoutCandidat(etudiant);\r\n                            etudiant.setAffectation(voeu);\r\n                            // TRACAGE : System.out.println(\"Voeu\"+ voeu.getId() + \", etu :\" + voeu.getCandidatsAcceptes().get(0));\r\n                        }\r\n                        else {\r\n                            // TRACAGE : System.out.println(\"CAS NUMERO 1\");\r\n                            etudiant.refuser();\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n        return new Sauvegarde(Sauvegarde.Priorite.ETABLISSEMENT, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(), degreSatisfactionEtablissementsSelonCapaciteAccueil());\r\n    }\r\n\r\n    /**\r\n     * Met en application l'algorithme du mariage stable sur notre jeu de données.\r\n     * Priorité : donnée aux étudiants.\r\n     */\r\n    public Sauvegarde mariageStableEtudiants()\r\n    {\r\n        while (!acceptationsTerminees())\r\n        {\r\n            Map<Etablissement, List<Etudiant>> candidaturesTemporaires = new HashMap<Etablissement, List<Etudiant>>();\r\n            \r\n            // On établit, pour chaque établissement, une liste d'étudiants dont le souhait le plus élevé est de\r\n            // rejoindre ce dernier\r\n            for (Etudiant etudiant : this.candidats) {\r\n                /* TRACAGE\r\n                System.out.println(\"ETAPE1 - Etudiant\"+etudiant.getId()+ \", premiervoeu : Etablissement\" + etudiant.getPremierVoeux().getId() + \", voeux restants : [\"  );\r\n                for (Etablissement etablissement : etudiant.getListeVoeux())\r\n                {\r\n                    System.out.print(etablissement.getId() + \",\");\r\n                }\r\n                System.out.print(\"]\\n\");*/\r\n                if (!etudiant.estAffecte()) {\r\n                    Etablissement voeu = etudiant.voeuActuel();\r\n                    if (!candidaturesTemporaires.containsKey(voeu)) {\r\n                        List<Etudiant> etudiantsCandidats = new ArrayList<Etudiant>();\r\n                        candidaturesTemporaires.put(voeu, etudiantsCandidats);\r\n                    }\r\n                    /* TRACAGE\r\n                    System.out.println(\"ETAPE PAS AFFECTE - Etablissement\" + voeu.getId() + \", candidatsAcceptes : \");\r\n                    for (Etudiant e : voeu.getCandidatsAcceptes())\r\n                    {\r\n                        System.out.print(e.getId() + \",\");\r\n                    }*/\r\n                    if (voeu.accueilPossible()) {\r\n                        candidaturesTemporaires.get(voeu).add(etudiant);\r\n                        // TRACAGE : System.out.println(voeu.getCandidatsAcceptes());\r\n\r\n                    } else {\r\n                        // TRACAGE : System.out.println(\"CAS NUMERO 1\");\r\n                        etudiant.refuser();\r\n                    }\r\n                }\r\n            }\r\n            \r\n            // Pour chaque établissement, on sélectionne les meilleurs ayant candidatés à ce tour, et on refuse les\r\n            // autres\r\n            for (Etablissement etablissement : candidaturesTemporaires.keySet())\r\n            {\r\n                List<Etudiant> candidats = candidaturesTemporaires.get(etablissement);\r\n                int placesDisponibles = etablissement.getCapaciteAccueil() - etablissement.getCandidatsAcceptes().size();\r\n                \r\n                while ((placesDisponibles > 0) && (!candidats.isEmpty()))\r\n                {\r\n                    Etudiant meilleur = etudiantChoisi(candidats, etablissement);\r\n                    etablissement.ajoutCandidat(meilleur);\r\n                    candidats.remove(meilleur);\r\n                    meilleur.setAffectation(etablissement);                    \r\n                    placesDisponibles--;\r\n                }\r\n\r\n                for (Etudiant etudiant : candidats)\r\n                {\r\n                    etudiant.refuser();\r\n                }                \r\n            }\r\n        }\r\n        return new Sauvegarde(Sauvegarde.Priorite.ETUDIANT, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(), degreSatisfactionEtablissementsSelonCapaciteAccueil());\r\n    }\r\n\r\n    /**\r\n     *\r\n     * @param etudiants\r\n     * @param etablissement\r\n     * @return\r\n     */    \r\n    private static Etudiant etudiantChoisi(List<Etudiant> etudiants, Etablissement etablissement)\r\n    {\r\n        Etudiant meilleur = null;\r\n        int classement = -1;\r\n        for (Etudiant etudiant : etudiants)\r\n        {\r\n            int classementEtudiant = etablissement.getPreferences().indexOf(etudiant);\r\n            if (classement == -1)\r\n            {\r\n                meilleur = etudiant;\r\n                classement = etablissement.getPreferences().indexOf(etudiant);\r\n            } else if (classementEtudiant < classement) {\r\n                meilleur = etudiant;\r\n                classement = classementEtudiant; \r\n            }\r\n        }\r\n\r\n        return meilleur;        \r\n    } \r\n\r\n    /**\r\n     * Permet d'afficher pour chaque candidat son affectation\r\n     */\r\n    public void affichageAffectations()\r\n    {\r\n        for (Etudiant etudiant : candidats)\r\n        {\r\n            System.out.println(\"Etudiant\"+etudiant.getId() + \", affectation : Etablissement[capacite : \" + etudiant.getEtablissementAffecte().getCapaciteAccueil()+ \"]\" + etudiant.getEtablissementAffecte().getId() + \"\\n\");\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Permet de vérifier que tous les candidats ont eu une affectation\r\n     * @return un booleen, false si un étudiant n'a pas d'affectation, true sinon\r\n     */\r\n    public boolean acceptationsTerminees()\r\n    {\r\n        for (Etudiant e : candidats)\r\n        {\r\n            if (!e.estAffecte())\r\n            {\r\n                return false;\r\n            }\r\n        }\r\n        return true;\r\n    }\r\n\r\n    /**\r\n     * Permet de restaurer notre jeu de données pour être capable de lui appliquer une nouvelle affectation\r\n     */\r\n    public void restaurer()\r\n    {\r\n        for (Etudiant etudiant : candidats)\r\n        {\r\n            etudiant.restaurer();\r\n        }\r\n        \r\n        for (Etablissement etablissement : etablissements)\r\n        {\r\n            etablissement.restaurer();\r\n        }\r\n    }\r\n\r\n    /* =========================================================================================\r\n     *  Méthodes implémentées dans la cadre du calcul de la satisfaction\r\n     *  =========================================================================================\r\n     */\r\n\r\n    /**\r\n     * Calcule le degré de satisfaction globale des étudiants.\r\n     * @return une mesure comprise dans l'intervalle [0 ; 1].\r\n     */\r\n    public float degreSatisfactionEtudiants() {\r\n        float satisfactionGlobale = 0;\r\n        if (this.candidats.isEmpty())\r\n            return 0.f;\r\n        for (Etudiant etudiant :\r\n                this.candidats) {\r\n            satisfactionGlobale += etudiant.degreSatisfaction();\r\n        }\r\n        return satisfactionGlobale/this.candidats.size();\r\n    }\r\n\r\n\r\n    public float degreSatisfactionEtablissements() {\r\n        float satisfactionGlobale = 0;\r\n        if (this.etablissements.isEmpty())\r\n            return 0.f;\r\n        for (Etablissement etablissement :\r\n                this.etablissements) {\r\n            satisfactionGlobale += etablissement.degreSatisfaction();\r\n        }\r\n        return satisfactionGlobale/this.etablissements.size();\r\n    }\r\n\r\n    /**\r\n     * Calcule le degré de satisfaction globale des établissements selon le nombre de candidats acceptés.\r\n     * @return une mesure comprise dans l'intervalle [0 ; 1].\r\n     */\r\n    public float degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes() {\r\n        float satisfactionGlobale = 0;\r\n        if (this.etablissements.isEmpty())\r\n            return 0.f;\r\n        for (Etablissement etablissement :\r\n                this.etablissements) {\r\n            satisfactionGlobale += etablissement.degreSatisfactionSelonNombreCandidatsAcceptes();\r\n        }\r\n        return satisfactionGlobale/this.etablissements.size();\r\n    }\r\n\r\n    /**\r\n     * Calcule le degré de satisfaction globale des établissements selon la capacité d'accueil.\r\n     * @return une mesure comprise dans l'intervalle [0 ; 1].\r\n     */\r\n    public float degreSatisfactionEtablissementsSelonCapaciteAccueil() {\r\n        float satisfactionGlobale = 0;\r\n        if (this.etablissements.isEmpty())\r\n            return 0.f;\r\n        for (Etablissement etablissement :\r\n                this.etablissements) {\r\n            satisfactionGlobale += etablissement.degreSatisfactionSelonCapaciteAccueil();\r\n        }\r\n        return satisfactionGlobale/this.etablissements.size();\r\n    }\r\n\r\n    /*public Sauvegarde sauvegarder(Sauvegarde.Priorite priorite)\r\n    {\r\n        return new Sauvegarde(priorite, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(), degreSatisfactionEtablissementsSelonCapaciteAccueil());\r\n    }*/\r\n\r\n    /* =========================================================================================\r\n     *  Pour mettre en place un jeu de données correspondant à l'exemple du cours\r\n     *  =========================================================================================\r\n     */\r\n\r\n    /**\r\n     * Initialise un jeu de données dont les valeurs correspondent à l'exemple du cours\r\n     */\r\n    private void exempleDuCours() {\r\n        Etablissement etablissement1 = new Etablissement(1, 1, null, new ArrayList<>());\r\n        Etablissement etablissement2 = new Etablissement(2, 1, null, new ArrayList<>());\r\n        Etablissement etablissement3 = new Etablissement(3, 1, null, new ArrayList<>());\r\n        etablissements.add(etablissement1);\r\n        etablissements.add(etablissement2);\r\n        etablissements.add(etablissement3);\r\n        List<Etablissement> preferencesEtudiant1 = new ArrayList<>();\r\n        preferencesEtudiant1.add(etablissement2);\r\n        preferencesEtudiant1.add(etablissement1);\r\n        preferencesEtudiant1.add(etablissement3);\r\n        List<Etablissement> preferencesEtudiant2 = new ArrayList<>();\r\n        preferencesEtudiant2.add(etablissement1);\r\n        preferencesEtudiant2.add(etablissement2);\r\n        preferencesEtudiant2.add(etablissement3);\r\n        List<Etablissement> preferencesEtudiant3 = new ArrayList<>();\r\n        preferencesEtudiant3.add(etablissement1);\r\n        preferencesEtudiant3.add(etablissement2);\r\n        preferencesEtudiant3.add(etablissement3);\r\n        Etudiant etudiant1 = new Etudiant(1, preferencesEtudiant1, false);\r\n        Etudiant etudiant2 = new Etudiant(2, preferencesEtudiant2, false);\r\n        Etudiant etudiant3 = new Etudiant(3, preferencesEtudiant3, false);\r\n        candidats.add(etudiant1);\r\n        candidats.add(etudiant2);\r\n        candidats.add(etudiant3);\r\n        List<Etudiant> classementEtablissement1 = new ArrayList<>();\r\n        classementEtablissement1.add(etudiant1);\r\n        classementEtablissement1.add(etudiant3);\r\n        classementEtablissement1.add(etudiant2);\r\n        etablissement1.setClassement(classementEtablissement1);\r\n        List<Etudiant> classementEtablissement2 = new ArrayList<>();\r\n        classementEtablissement2.add(etudiant2);\r\n        classementEtablissement2.add(etudiant1);\r\n        classementEtablissement2.add(etudiant3);\r\n        etablissement2.setClassement(classementEtablissement2);\r\n        List<Etudiant> classementEtablissement3 = new ArrayList<>();\r\n        classementEtablissement3.add(etudiant2);\r\n        classementEtablissement3.add(etudiant1);\r\n        classementEtablissement3.add(etudiant3);\r\n        etablissement3.setClassement(classementEtablissement3);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/modeles/PlateformeCandidatures.java b/src/main/java/modeles/PlateformeCandidatures.java
+--- a/src/main/java/modeles/PlateformeCandidatures.java	(revision 72945c5daf19c41ce40251dc215b2aca48efbe2b)
++++ b/src/main/java/modeles/PlateformeCandidatures.java	(date 1669573777497)
+@@ -1,9 +1,5 @@
+ package modeles;
+ 
+-import modeles.Etablissement;
+-import modeles.Etudiant;
+-import modeles.Sauvegarde;
+-
+ import java.util.ArrayList;
+ import java.util.HashMap;
+ import java.util.List;
+@@ -11,8 +7,8 @@
+ 
+ public class PlateformeCandidatures {
+     /* ATTRIBUTS */
+-    private final String nom = "Plateforme de Candidatures";
+-    private List<Etablissement> etablissements;
++    private String nom = "Plateforme de Candidatures";
++    private final List<Etablissement> etablissements;
+     private List<Etudiant> candidats;
+ 
+     /* CONSTRUCTEURS */
+@@ -111,7 +107,7 @@
+         return result.toString();
+     }
+ 
+-    /* =========================================================================================
++    /* ==========================================================================================
+      *  Méthodes implémentées dans la cadre de la mise en place de l'algorithme du mariage stable
+      *  =========================================================================================
+      */
+@@ -119,58 +115,51 @@
+     /**
+      * Met en application l'algorithme du mariage stable sur notre jeu de données.
+      * Priorité : donnée aux établissements.
++     * @return une sauvegarde représentant les couples d'associations obtenues à la fin de l'algorithme.
+      */
+     public Sauvegarde mariageStableEtablissements()
+     {
+         while (!acceptationsTerminees())
+         {
+-            for (Etudiant etudiant : this.candidats)
+-            {
+-                /* TRACAGE
+-                System.out.println("ETAPE1 - Etudiant"+etudiant.getId()+ ", premiervoeu : Etablissement" + etudiant.getPremierVoeux().getId() + ", voeux restants : ["  );
+-                for (Etablissement etablissement : etudiant.getListeVoeux())
+-                {
+-                    System.out.print(etablissement.getId() + ",");
+-                }
+-                System.out.print("]\n");*/
++            for (Etudiant etudiant : this.candidats) {
++                // Rien à faire si le candidat est déjà affecté temporairement.
+                 if (!etudiant.estAffecte()) {
+                     Etablissement voeu = etudiant.voeuActuel();
+-                    /* TRACAGE
+-                    System.out.println("ETAPE PAS AFFECTE - Etablissement" + voeu.getId() + ", candidatsAcceptes : ");
+-                    for (Etudiant e : voeu.getCandidatsAcceptes())
+-                    {
+-                        System.out.print(e.getId() + ",");
+-                    }*/
++                    // On ajoute l'étudiant à la liste des candidats acceptés temporairements si l'établissement a de
++                    // la place.
+                     if (voeu.accueilPossible()) {
+-                        // TRACAGE : System.out.println(voeu.getCandidatsAcceptes());
+                         voeu.ajoutCandidat(etudiant);
+                         etudiant.setAffectation(voeu);
+-                    } else {
+-                        // TRACAGE : System.out.println("ETAPE PEUT PAS ACCUEILLIR - Etablissement : " + voeu.getId() + ";" + voeu.getCandidatsAcceptes());
++                    }
++                    // Sinon, on ...
++                    else {
+                         Etudiant cmp = voeu.dernierCandidat();
+-                        // TRACAGE : System.out.println("Etudiant à comparer (moins bon) : Etudiant" + cmp.getId() + ", position : " + voeu.getPreferences().indexOf(cmp));
++                        // ... voit si le candidat étudié actuellement est plus souhaité que le moins souhaité des
++                        // candidats acceptés par l'établissement. Si oui, on désaffecte l'étudiant le moins bon et on
++                        // affecte le candidat étudié.
+                         if (voeu.getPreferences().indexOf(cmp) > voeu.getPreferences().indexOf(etudiant)) {
+-                            // TRACAGE : System.out.println("CAS NUMERO 2");
+                             voeu.getCandidatsAcceptes().remove(cmp);
+                             cmp.desaffecter();
+                             voeu.ajoutCandidat(etudiant);
+                             etudiant.setAffectation(voeu);
+-                            // TRACAGE : System.out.println("Voeu"+ voeu.getId() + ", etu :" + voeu.getCandidatsAcceptes().get(0));
+                         }
++                        // Sinon, on refuse l'étudiant.
+                         else {
+-                            // TRACAGE : System.out.println("CAS NUMERO 1");
+                             etudiant.refuser();
+                         }
+                     }
+                 }
+             }
+         }
+-        return new Sauvegarde(Sauvegarde.Priorite.ETABLISSEMENT, this.etablissements, degreSatisfactionEtudiants(), degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(), degreSatisfactionEtablissementsSelonCapaciteAccueil());
++        return new Sauvegarde(Sauvegarde.Priorite.ETABLISSEMENT, this.etablissements, degreSatisfactionEtudiants(),
++                degreSatisfactionEtablissementsSelonNombreCandidatsAcceptes(),
++                degreSatisfactionEtablissementsSelonCapaciteAccueil());
+     }
+ 
+     /**
+      * Met en application l'algorithme du mariage stable sur notre jeu de données.
+      * Priorité : donnée aux étudiants.
++     * @return une sauvegarde représentant les couples d'associations obtenues à la fin de l'algorithme.
+      */
+     public Sauvegarde mariageStableEtudiants()
+     {
+@@ -179,45 +168,36 @@
+             Map<Etablissement, List<Etudiant>> candidaturesTemporaires = new HashMap<Etablissement, List<Etudiant>>();
+             
+             // On établit, pour chaque établissement, une liste d'étudiants dont le souhait le plus élevé est de
+-            // rejoindre ce dernier
++            // rejoindre ce dernier.
+             for (Etudiant etudiant : this.candidats) {
+-                /* TRACAGE
+-                System.out.println("ETAPE1 - Etudiant"+etudiant.getId()+ ", premiervoeu : Etablissement" + etudiant.getPremierVoeux().getId() + ", voeux restants : ["  );
+-                for (Etablissement etablissement : etudiant.getListeVoeux())
+-                {
+-                    System.out.print(etablissement.getId() + ",");
+-                }
+-                System.out.print("]\n");*/
++                // Rien à faire si le candidat est déjà affecté temporairement.
+                 if (!etudiant.estAffecte()) {
+                     Etablissement voeu = etudiant.voeuActuel();
++                    // Initialisation dans les candidatures temporaires de la clé voeu si celle-ci n'y est pas.
+                     if (!candidaturesTemporaires.containsKey(voeu)) {
+                         List<Etudiant> etudiantsCandidats = new ArrayList<Etudiant>();
+                         candidaturesTemporaires.put(voeu, etudiantsCandidats);
+                     }
+-                    /* TRACAGE
+-                    System.out.println("ETAPE PAS AFFECTE - Etablissement" + voeu.getId() + ", candidatsAcceptes : ");
+-                    for (Etudiant e : voeu.getCandidatsAcceptes())
+-                    {
+-                        System.out.print(e.getId() + ",");
+-                    }*/
++                    // Si l'établissment a des places disponibles, on ajoute l'étudiant aux candidature à étudier.
+                     if (voeu.accueilPossible()) {
+                         candidaturesTemporaires.get(voeu).add(etudiant);
+-                        // TRACAGE : System.out.println(voeu.getCandidatsAcceptes());
+ 
+-                    } else {
+-                        // TRACAGE : System.out.println("CAS NUMERO 1");
++                    }
++                    // Sinon, on le refuse.
++                    else {
+                         etudiant.refuser();
+                     }
+                 }
+             }
+             
+-            // Pour chaque établissement, on sélectionne les meilleurs ayant candidatés à ce tour, et on refuse les
+-            // autres
++            // Pour chaque établissement, on sélectionne les meilleurs ayant candidatés à ce tour dans
++            // "candidaturesTemporaires", et on refuse les autres.
+             for (Etablissement etablissement : candidaturesTemporaires.keySet())
+             {
+                 List<Etudiant> candidats = candidaturesTemporaires.get(etablissement);
+                 int placesDisponibles = etablissement.getCapaciteAccueil() - etablissement.getCandidatsAcceptes().size();
+-                
++
++                // Tant que l'établissement étudié a des places, on lui ajoute le meilleur candidat/
+                 while ((placesDisponibles > 0) && (!candidats.isEmpty()))
+                 {
+                     Etudiant meilleur = etudiantChoisi(candidats, etablissement);
+@@ -226,7 +206,7 @@
+                     meilleur.setAffectation(etablissement);                    
+                     placesDisponibles--;
+                 }
+-
++                // Les autres candidats sont refusés.
+                 for (Etudiant etudiant : candidats)
+                 {
+                     etudiant.refuser();
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"fc55d5cf-aa99-498a-9a2b-783196ff05a5\" name=\"Changes\" comment=\"Sauvegarde résultats après application algorithme mariage stable\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2022_18_35__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2022_18_35__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/modeles/Etudiant.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/modeles/Etudiant.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/modeles/PlateformeCandidatures.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/modeles/PlateformeCandidatures.java\" afterDir=\"false\" />\r\n    </list>\r\n    <list id=\"44aee43e-db1c-40d6-8ce6-bef9446efca2\" name=\"Changes by Scooby\" comment=\"Changes by Scooby\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HsCOouOYj4NcLRLdzvrG2HF2yE\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,\r\n    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Test\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"11\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"main.Test\" />\r\n      <module name=\"Projet-HAI902\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"main.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Test\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"fc55d5cf-aa99-498a-9a2b-783196ff05a5\" name=\"Changes\" comment=\"\" />\r\n      <created>1669064380978</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1669064380978</updated>\r\n      <workItem from=\"1669064382513\" duration=\"610000\" />\r\n      <workItem from=\"1669065451193\" duration=\"6436000\" />\r\n      <workItem from=\"1669146751727\" duration=\"7510000\" />\r\n      <workItem from=\"1669230071156\" duration=\"1530000\" />\r\n      <workItem from=\"1669231861932\" duration=\"7729000\" />\r\n      <workItem from=\"1669306228176\" duration=\"4511000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Sauvegarde résultats après application algorithme mariage stable\">\r\n      <created>1669238401628</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669238401628</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Changes by Scooby\">\r\n      <created>1669239139434</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669239139434</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Changes by Scooby\">\r\n      <created>1669239163067</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669239163068</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Sauvegarde résultats après application algorithme mariage stable\">\r\n      <created>1669239184172</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669239184172</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Sauvegarde résultats après application algorithme mariage stable\">\r\n      <created>1669239224916</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669239224916</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Changes by Scooby\" />\r\n    <MESSAGE value=\"Sauvegarde résultats après application algorithme mariage stable\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Sauvegarde résultats après application algorithme mariage stable\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 72945c5daf19c41ce40251dc215b2aca48efbe2b)
++++ b/.idea/workspace.xml	(date 1669650774949)
+@@ -4,10 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="Sauvegarde résultats après application algorithme mariage stable">
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2022_18_35__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2022_18_35__Changes_.xml" afterDir="false" />
++    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="Suppression de l'attribut etablissement affecté">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/modeles/Etudiant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/Etudiant.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/modeles/PlateformeCandidatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/modeles/PlateformeCandidatures.java" afterDir="false" />
+     </list>
+     <list id="44aee43e-db1c-40d6-8ce6-bef9446efca2" name="Changes by Scooby" comment="Changes by Scooby" />
+@@ -86,6 +84,7 @@
+       <workItem from="1669230071156" duration="1530000" />
+       <workItem from="1669231861932" duration="7729000" />
+       <workItem from="1669306228176" duration="4511000" />
++      <workItem from="1669545697766" duration="6712000" />
+     </task>
+     <task id="LOCAL-00001" summary="Sauvegarde résultats après application algorithme mariage stable">
+       <created>1669238401628</created>
+@@ -122,7 +121,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1669239224916</updated>
+     </task>
+-    <option name="localTasksCounter" value="6" />
++    <task id="LOCAL-00006" summary="Suppression de l'attribut etablissement affecté">
++      <created>1669390868229</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1669390868229</updated>
++    </task>
++    <option name="localTasksCounter" value="7" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -142,6 +148,7 @@
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Changes by Scooby" />
+     <MESSAGE value="Sauvegarde résultats après application algorithme mariage stable" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Sauvegarde résultats après application algorithme mariage stable" />
++    <MESSAGE value="Suppression de l'attribut etablissement affecté" />
++    <option name="LAST_COMMIT_MESSAGE" value="Suppression de l'attribut etablissement affecté" />
+   </component>
+ </project>
+\ No newline at end of file
