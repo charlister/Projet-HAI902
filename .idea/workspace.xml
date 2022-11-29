@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="Sauvegarde résultats après application algorithme mariage stable">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2022_18_35__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2022_18_35__Changes_.xml" afterDir="false" />
+    <list default="true" id="fc55d5cf-aa99-498a-9a2b-783196ff05a5" name="Changes" comment="suppression des bordures">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Interface2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Interface2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Interface3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Interface3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Interface5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Interface5.java" afterDir="false" />
     </list>
     <list id="44aee43e-db1c-40d6-8ce6-bef9446efca2" name="Changes by Scooby" comment="Changes by Scooby" />
     <option name="SHOW_DIALOG" value="false" />
@@ -140,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669239224916</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="gui interfaces added">
+      <created>1669650746899</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1669650746899</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +169,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes by Scooby" />
     <MESSAGE value="Sauvegarde résultats après application algorithme mariage stable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sauvegarde résultats après application algorithme mariage stable" />
+    <MESSAGE value="gui interfaces added" />
+    <MESSAGE value="suppression des bordures" />
+    <option name="LAST_COMMIT_MESSAGE" value="suppression des bordures" />
   </component>
 </project>

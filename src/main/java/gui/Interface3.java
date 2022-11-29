@@ -31,9 +31,8 @@ public class Interface3 extends JFrame {
         this.setVisible(true);
         this.setTitle("Resultats d'affectation");
         this.setLayout(new GridBagLayout());
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.gbc = new GridBagConstraints();
 
+        this.gbc = new GridBagConstraints();
         fillTable();
     }
     public void fillTable(){
