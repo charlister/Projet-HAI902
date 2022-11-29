@@ -104,7 +104,7 @@ public class Interface5 extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JLabel label00 = new JLabel("Selon Priorité Etudiants ");
+        JLabel label00 = new JLabel("Critère : satisfaction des étudiants ");
         label00.setFont(new Font("Dialog", Font.BOLD, 16));
         this.panel.add(label00, gbc);
 
@@ -125,7 +125,7 @@ public class Interface5 extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 4;
-        JLabel label1 = new JLabel("Selon nombre de candidats acceptés ");
+        JLabel label1 = new JLabel("Critère : satisfaction des établissements");
         label1.setFont(new Font("Dialog", Font.BOLD, 16));
         this.panel.add(label1, gbc);
 
@@ -140,7 +140,7 @@ public class Interface5 extends JFrame {
         List<Sauvegarde> sauvegardesPrioriteEtablissementsSelonCapaciteAccueil = ordonnerPrioriteEtablissementsSelonCapaciteAccueil(sauvegardes);
         gbc.gridx = 0;
         gbc.gridy = 7;
-        JLabel label3 = new JLabel("Selon capacité d'acceuil");
+        JLabel label3 = new JLabel("Critère : satisfaction des établissements par rapport à leur capacité d'accueil");
         label3.setFont(new Font("Dialog", Font.BOLD, 16));
         this.panel.add(label3, gbc);
 

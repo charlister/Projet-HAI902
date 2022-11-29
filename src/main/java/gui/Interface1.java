@@ -94,7 +94,7 @@ public class Interface1 extends JFrame {
                    PlateformeCandidatures plateformeCandidatures = new PlateformeCandidatures(parseInt(nbreEtudiant), parseInt(capacite), parseInt(capacite), parseInt(nbreEtablissement));
                    new Interface2(plateformeCandidatures);
                 } else {
-                   JOptionPane.showMessageDialog(new Interface1(), "CANT");
+                   JOptionPane.showMessageDialog(new Interface1(), "Veuillez entrer des effectifs tels que :\nLe nombre d'étudiants soit inférieur ou égal à la multiplication de la capacité des établissements par le nombre d'établissement");
                 }
 
             }

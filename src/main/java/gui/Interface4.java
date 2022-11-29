@@ -32,6 +32,18 @@ public class Interface4 extends JFrame {
         fillStatistics();
     }
 
+    private String convertirDegreSatisfactionEnPourcentage(float degreSatisfaction) {
+        String tmp;
+        tmp = Double.toString(degreSatisfaction*100);
+        int i = 5;
+        while (i>=0) {
+            if(tmp.length() >= i)
+                break;
+            i--;
+        }
+        tmp = tmp.substring(0, i)+"%";
+        return tmp;
+    }
     public void fillStatistics(){
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;

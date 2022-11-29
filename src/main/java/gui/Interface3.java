@@ -107,6 +107,7 @@ public class Interface3 extends JFrame {
                     i++;
 
                 }
+            }
 
                 gbc.gridx = 0;
                 gbc.gridy = 1;
@@ -119,7 +120,6 @@ public class Interface3 extends JFrame {
                         new Interface4(sauvegardeEtab, sauvegardeEtud, true, false);
                     }
                 });
-            }
         }else if(etudSelected){
             gbc.gridx = 0;
             gbc.gridy = 0;
