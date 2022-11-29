@@ -22,39 +22,50 @@ public class Interface2 extends JFrame{
 
     PlateformeCandidatures plateformeCandidatures;
 
+    JPanel panel;
+    JScrollPane scrollpane;
+
+
     public Interface2(PlateformeCandidatures plateformeCandidatures) {
-         this.plateformeCandidatures = plateformeCandidatures;
+        this.plateformeCandidatures = plateformeCandidatures;
         this.buttonAffectation = new JButton("Lancer Mariage Stable");
         this.cbPrioriteEtab = new JCheckBox("Priorite aux Etablissements");
         this.cbPrioriteStud = new JCheckBox("Priorite aux Etudiants");
+        this.panel = new JPanel();
+        this.scrollpane = new JScrollPane(panel);
         this.setTitle("Affichage");
-        this.setLayout(new GridBagLayout());
         Toolkit outil = getToolkit();
+        fillList();
         this.setSize(outil.getScreenSize());
         this.setVisible(true);
         //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        fillList();
+
     }
 
     public void fillList(){
+        this.panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH ;
+        gbc.weightx = 1.0 ;
+        gbc.weighty = 1.0 ;
         gbc.gridx = 0;
         gbc.gridy = 0;
         JLabel label1 = new JLabel("Liste des étudiants avec leurs voeux");
         label1.setFont(new Font("Dialog", Font.BOLD, 17));
-        this.add(label1, gbc);
+        this.panel.add(label1, gbc);
         gbc.ipady = 20;
         gbc.ipadx=20;
         etudiants=plateformeCandidatures.getCandidats();
         for(int i=0;i<etudiants.size();i++){
             gbc.gridx = 0;
             gbc.gridy=i+1;
-            this.add(new JLabel("Etudiant "+ Long.toString(etudiants.get(i).getId())), gbc);
+            this.panel.add(new JLabel("Etudiant "+ Long.toString(etudiants.get(i).getId())), gbc);
             for(int j=0;j<etudiants.get(i).getListeVoeux().size();j++){
                 gbc.gridx=j+1;
                 gbc.gridy = i+1;
-                this.add(new JLabel("Etablissement "+Long.toString(etudiants.get(i).getListeVoeux().get(j).getId())), gbc);
+                this.panel.add(new JLabel("Etablissement "+Long.toString(etudiants.get(i).getListeVoeux().get(j).getId())), gbc);
             }
         }
 
@@ -63,7 +74,7 @@ public class Interface2 extends JFrame{
         gbc.gridy = etudiants.size()+1;
         JLabel label2 = new JLabel("Liste des établissements avec classements");
         label2.setFont(new Font("Dialog", Font.BOLD, 17));
-        this.add(label2, gbc);
+        this.panel.add(label2, gbc);
 
         int k=0, y = 0;
         etablissements = plateformeCandidatures.getEtablissements();
@@ -71,13 +82,13 @@ public class Interface2 extends JFrame{
             if (k < etablissements.size()) {
                 gbc.gridx = 0;
                 gbc.gridy = i + 1;
-                this.add(new JLabel("Etablissement " + Long.toString(etablissements.get(k).getId())), gbc);
+                this.panel.add(new JLabel("Etablissement " + Long.toString(etablissements.get(k).getId())), gbc);
 
                 for (int l = 0; l < etablissements.get(k).getPreferences().size() ; l++) {
                     gbc.gridx = l + 1;
                     gbc.gridy = i + 1;
                     y = gbc.gridy;
-                    this.add(new JLabel("Etudiant " + Long.toString(etablissements.get(k).getPreferences().get(l).getId())), gbc);
+                    this.panel.add(new JLabel("Etudiant " + Long.toString(etablissements.get(k).getPreferences().get(l).getId())), gbc);
                 }
                 k++;
             }
@@ -89,28 +100,29 @@ public class Interface2 extends JFrame{
         y1 = y+1;
         JLabel label3 = new JLabel("Choisir au moins une option ");
         label3.setFont(new Font("Dialog", Font.BOLD, 17));
-        this.add(label3, gbc);
+        this.panel.add(label3, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = y1+1;
         int y2 = y1+1;
-        this.add(cbPrioriteEtab, gbc);
+        this.panel.add(cbPrioriteEtab, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = y1+1;
         int y3 = y2+1;
-        this.add(cbPrioriteStud, gbc);
+        this.panel.add(cbPrioriteStud, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = y3+1;
-        this.add(buttonAffectation, gbc);
+        this.panel.add(buttonAffectation, gbc);
+        this.add(this.scrollpane);
 
         buttonAffectation.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (cbPrioriteEtab.isSelected() && cbPrioriteStud.isSelected()){
-                     Sauvegarde sauvegardeEtud = plateformeCandidatures.mariageStableEtudiants();
-                     plateformeCandidatures.restaurer();
+                    Sauvegarde sauvegardeEtud = plateformeCandidatures.mariageStableEtudiants();
+                    plateformeCandidatures.restaurer();
                     Sauvegarde sauvegardeEtab = plateformeCandidatures.mariageStableEtablissements();
                     new Interface3(sauvegardeEtud, sauvegardeEtab,true,true);
                 }
@@ -121,7 +133,7 @@ public class Interface2 extends JFrame{
                 }
                 else if (cbPrioriteStud.isSelected()) {
                     plateformeCandidatures.restaurer();
-                     Sauvegarde sauvegardeEtud = plateformeCandidatures.mariageStableEtudiants();
+                    Sauvegarde sauvegardeEtud = plateformeCandidatures.mariageStableEtudiants();
                     new Interface3(sauvegardeEtud, null,false,true);
                 }
                 //dispose();
